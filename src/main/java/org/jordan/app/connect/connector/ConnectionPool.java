@@ -1,6 +1,7 @@
 package org.jordan.app.connect.connector;
 
 import com.google.common.collect.Lists;
+import org.jordan.app.connect.exception.JDBCException;
 import org.jordan.app.connect.model.JDBCParam;
 import org.jordan.app.connect.utils.StringUtils;
 
@@ -21,13 +22,19 @@ public class ConnectionPool {
     public static Connection getConnection(JDBCParam jdbcParam) {
         Connection connection = pool.get(jdbcParam.getId());
         if (connection == null) {
-            connection = createConnection(jdbcParam);
+            try {
+                connection = createConnection(jdbcParam);
+            } catch (Exception e) {
+                e.printStackTrace();
+                throw new JDBCException(e.getMessage());
+            }
             pool.put(jdbcParam.getId(), connection);
         }
         return connection;
     }
 
-    private static Connection createConnection(JDBCParam jdbcParam) {
+
+    private static Connection createConnection(JDBCParam jdbcParam) throws Exception{
         Connection conn = null ;
         String url = "jdbc:mysql://"+jdbcParam.getHost()+":"+jdbcParam.getPort();
         if (StringUtils.isNotBlank(jdbcParam.getDatebase())) {
@@ -39,12 +46,8 @@ public class ConnectionPool {
         } else {
             url = url + "&amp;useSSL=false";
         }
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection(url,jdbcParam.getUserName(),jdbcParam.getPassword());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Class.forName("com.mysql.jdbc.Driver");
+        conn = DriverManager.getConnection(url,jdbcParam.getUserName(),jdbcParam.getPassword());
         return conn;
     }
 

@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
-<TabPane prefHeight="519.0" prefWidth="599.0" side="BOTTOM" tabClosingPolicy="ALL_TABS" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jordan.app.connect.MysqlTabpaneController">
+<TabPane prefHeight="519.0" prefWidth="599.0" side="BOTTOM" tabClosingPolicy="ALL_TABS" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jordan.app.connect.controller.MysqlTabpaneController">
 
     <tabs>
         <Tab closable="true" text="mysql">
@@ -49,18 +47,18 @@
                                                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                     </rowConstraints>
                                                     <children>
-                                                        <TextField fx:id="connName" GridPane.columnIndex="1" />
+                                                        <TextField fx:id="connName" prefHeight="27.0" prefWidth="236.0" GridPane.columnIndex="1" />
                                                         <Label fx:id="name" text="Name:" />
                                                         <Label text="Host:" GridPane.rowIndex="1" />
-                                                        <TextField fx:id="host" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                        <TextField fx:id="host" prefHeight="27.0" prefWidth="236.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                                         <Label text="Username:" GridPane.rowIndex="2" />
-                                                        <TextField fx:id="userName" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                        <TextField fx:id="userName" prefWidth="236.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                                         <Label text="Password:" GridPane.rowIndex="3" />
                                                         <Label text="Database:" GridPane.rowIndex="4" />
-                                                        <TextField fx:id="database" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                                        <PasswordField fx:id="password" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                        <TextField fx:id="database" prefWidth="236.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                                        <PasswordField fx:id="password" prefWidth="236.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                                         <Label text="Port:" GridPane.rowIndex="5" />
-                                                        <PasswordField fx:id="port" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                                        <PasswordField fx:id="port" prefWidth="236.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                                                         <CheckBox fx:id="isSSL" mnemonicParsing="false" text="is SSL" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                                                         <Label fx:id="configId" text="" GridPane.rowIndex="6" />
                                                     </children>

@@ -1,21 +1,26 @@
-package org.jordan.app.connect;
+package org.jordan.app.connect.controller;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import de.felixroske.jfxsupport.FXMLController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.jordan.app.connect.connector.ConnectionPool;
+import org.jordan.app.connect.service.MysqlServiceImpl;
 import org.jordan.app.connect.model.JDBCParam;
 import org.jordan.app.connect.utils.MyFileUtils;
 import org.jordan.app.connect.utils.ShortUUID;
 import org.jordan.app.connect.utils.StringUtils;
 import org.jordan.app.connect.utils.XmlUtils;
 
+import javax.annotation.Resource;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -27,6 +32,7 @@ import java.util.*;
  * @date 2018/8/23上午9:22
  */
 @Slf4j
+@FXMLController
 public class MysqlTabpaneController implements Initializable {
 
     @FXML
@@ -62,10 +68,10 @@ public class MysqlTabpaneController implements Initializable {
     @FXML
     private TabPane mysqlTabpane;
 
-    private MysqlConsole mysqlConsole;
+    @Resource
+    private MysqlServiceImpl mysqlService;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        mysqlConsole = new MysqlConsole();
         try {
             initConfigs();
         } catch (Exception e) {
@@ -86,7 +92,7 @@ public class MysqlTabpaneController implements Initializable {
 
         open.setOnAction( event -> {
             Label label = mysqlListview.getSelectionModel().getSelectedItem();
-            Tab tab = mysqlConsole.addConsoleTab(label.getText(), label.getId());
+            Tab tab = addConsoleTab(label.getText(), label.getId());
             mysqlTabpane.getTabs().add(tab);
         });
 
@@ -110,8 +116,13 @@ public class MysqlTabpaneController implements Initializable {
 
         try {
             Label label = mysqlListview.getSelectionModel().getSelectedItem();
-            ConnectionPool.getConnection(paramMap.get(label.getId()));
+            mysqlService.testConnection(paramMap.get(label.getId()));
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("success");
+            alert.setHeaderText(null);
+            alert.setContentText("连接成功!");
 
+            alert.showAndWait();
         } catch (Exception e) {
             e.printStackTrace();
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -121,12 +132,6 @@ public class MysqlTabpaneController implements Initializable {
 
             alert.showAndWait();
         }
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("success");
-        alert.setHeaderText(null);
-        alert.setContentText("连接成功!");
-
-        alert.showAndWait();
 
     }
 
@@ -227,7 +232,13 @@ public class MysqlTabpaneController implements Initializable {
             log.info("listview dubbo click");
         } else {
             Label label = mysqlListview.getSelectionModel().getSelectedItem();
+            if (label == null) {
+                return;
+            }
             JDBCParam jdbcParam = paramMap.get(label.getId());
+            if (jdbcParam == null) {
+                return;
+            }
             connName.setText(jdbcParam.getName());
             host.setText(jdbcParam.getHost());
             userName.setText(jdbcParam.getUserName());
@@ -255,6 +266,45 @@ public class MysqlTabpaneController implements Initializable {
             jdbcParam.setId(configId.getText());
         }
         return jdbcParam;
+    }
+
+    public Tab addConsoleTab(String tabName, String tabId) {
+
+        Tab tab = new Tab();
+        tab.setText(tabName);
+        tab.setClosable(true);
+        tab.setId(tabId);
+
+        SplitPane splitPane = new SplitPane();
+        AnchorPane left = new AnchorPane();
+        AnchorPane right = new AnchorPane();
+
+        VBox vBox = new VBox();
+        TextField textField = new TextField();
+        ComboBox<String> tablesCombBox = new ComboBox<>();
+
+        //展示所有数据库
+        List<String> databases = ConnectionPool.getDatabases(tabId);
+        ListView<Label> listView = new ListView<>();
+        tablesCombBox.setOnAction(event -> {
+            listView.getItems().remove(0, listView.getItems().size());
+            String tableName = tablesCombBox.getSelectionModel().getSelectedItem();
+            List<String> tables = ConnectionPool.getTablesOfDatabase(tableName, tabId);
+            for (String table : tables) {
+                listView.getItems().addAll(new Label(table));
+            }
+        });
+
+        for (String database : databases) {
+            tablesCombBox.getItems().add(database);
+        }
+
+        vBox.getChildren().addAll(textField, tablesCombBox, listView);
+
+        left.getChildren().add(vBox);
+        splitPane.getItems().addAll(left, right);
+        tab.setContent(splitPane);
+        return tab;
     }
 
 

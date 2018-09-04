@@ -1,16 +1,14 @@
-package org.jordan.app.connect;
+package org.jordan.app.connect.controller;
 
+import de.felixroske.jfxsupport.FXMLController;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
+import org.jordan.app.connect.view.MysqlTabpaneView;
 
-import java.io.IOException;
+import javax.annotation.Resource;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -19,8 +17,12 @@ import java.util.ResourceBundle;
  * @Description:
  * @date 2018/8/22下午5:44
  */
+@FXMLController
 public class MainController implements Initializable {
-    private BorderPane rootLayout;
+    @Resource
+    private MysqlTabpaneView mysqlTabpaneView;
+    @FXML
+    private BorderPane mainBorderPane;
     @FXML
     private MenuItem addMysql;
     @FXML
@@ -47,16 +49,8 @@ public class MainController implements Initializable {
 
 
     public void addMysqlTab(ActionEvent event,String text) {
-        try {
+        mainBorderPane.setCenter(mysqlTabpaneView.getView());
 
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(this.getClass().getResource("/org/jordan/app/connect/MysqlTabpane.fxml"));
-            TabPane tabPane =   loader.load();
-            tabPane.getTabs().get(0).setText(text);
-            rootLayout.setCenter(tabPane);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     @FXML
@@ -64,7 +58,7 @@ public class MainController implements Initializable {
 
     }
 
-    public void setRootLayout(BorderPane rootLayout) {
-        this.rootLayout = rootLayout;
+    public void setMainBorderPane(BorderPane mainBorderPane) {
+        this.mainBorderPane = mainBorderPane;
     }
 }
