@@ -5,7 +5,7 @@
 <TabPane prefHeight="519.0" prefWidth="599.0" side="BOTTOM" tabClosingPolicy="ALL_TABS" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jordan.app.connect.controller.MysqlTabpaneController">
 
     <tabs>
-        <Tab closable="true" text="mysql">
+        <Tab closable="true" text="mysql" fx:id="mysqlTab">
             <content>
 
                 <TabPane fx:id="mysqlTabpane" tabClosingPolicy="UNAVAILABLE">

@@ -12,13 +12,15 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
-import org.jordan.app.connect.connector.ConnectionPool;
+import org.jordan.app.connect.connector.ConnectionConfigs;
+import org.jordan.app.connect.connector.Connections;
 import org.jordan.app.connect.service.MysqlServiceImpl;
 import org.jordan.app.connect.model.JDBCParam;
 import org.jordan.app.connect.utils.MyFileUtils;
 import org.jordan.app.connect.utils.ShortUUID;
 import org.jordan.app.connect.utils.StringUtils;
 import org.jordan.app.connect.utils.XmlUtils;
+import org.jordan.app.connect.view.MysqlConsoleView;
 
 import javax.annotation.Resource;
 import java.io.File;
@@ -64,12 +66,15 @@ public class MysqlTabpaneController implements Initializable {
     @FXML
     private Label configId;
 
-    private Map<String, JDBCParam> paramMap = Maps.newHashMap();
     @FXML
     private TabPane mysqlTabpane;
+    @FXML
+    private Tab mysqlTab;
 
     @Resource
     private MysqlServiceImpl mysqlService;
+    @Resource
+    private MysqlConsoleView mysqlConsoleView;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
@@ -96,6 +101,9 @@ public class MysqlTabpaneController implements Initializable {
             mysqlTabpane.getTabs().add(tab);
         });
 
+        mysqlTab.setOnClosed(event -> {
+            log.info("msyql tab closed");
+        });
 
     }
 
@@ -104,9 +112,9 @@ public class MysqlTabpaneController implements Initializable {
         File configFile = new File(path + File.separator + "config" + File.separator + "mysql" + File.separator + id + ".xml");
         if (configFile.exists() && configFile.isFile()) {
             configFile.delete();
-            paramMap.remove(id);
+            ConnectionConfigs.mysqlConfigs.remove(id);
         }
-        if (paramMap.isEmpty()) {
+        if (ConnectionConfigs.mysqlConfigs.isEmpty()) {
             resetConfig(false);
         }
 
@@ -116,7 +124,7 @@ public class MysqlTabpaneController implements Initializable {
 
         try {
             Label label = mysqlListview.getSelectionModel().getSelectedItem();
-            mysqlService.testConnection(paramMap.get(label.getId()));
+            mysqlService.testConnection(ConnectionConfigs.mysqlConfigs.get(label.getId()));
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("success");
             alert.setHeaderText(null);
@@ -149,7 +157,7 @@ public class MysqlTabpaneController implements Initializable {
                 label.setText(jdbcParam.getName());
                 label.setId(String.valueOf(jdbcParam.getId()));
                 configs.add(label);
-                paramMap.put(jdbcParam.getId(), jdbcParam);
+                ConnectionConfigs.mysqlConfigs.put(jdbcParam.getId(), jdbcParam);
             }
             mysqlListview.getItems().addAll(configs);
         }
@@ -182,7 +190,7 @@ public class MysqlTabpaneController implements Initializable {
             persistenConfig(jdbcParam);
         }
         configId.setText(jdbcParam.getId());
-        paramMap.put(jdbcParam.getId(), jdbcParam);
+        ConnectionConfigs.mysqlConfigs.put(jdbcParam.getId(), jdbcParam);
         Iterator<Label> iterator = mysqlListview.getItems().iterator();
         while (iterator.hasNext()) {
             Label label = iterator.next();
@@ -235,7 +243,7 @@ public class MysqlTabpaneController implements Initializable {
             if (label == null) {
                 return;
             }
-            JDBCParam jdbcParam = paramMap.get(label.getId());
+            JDBCParam jdbcParam = ConnectionConfigs.mysqlConfigs.get(label.getId());
             if (jdbcParam == null) {
                 return;
             }
@@ -270,6 +278,7 @@ public class MysqlTabpaneController implements Initializable {
 
     public Tab addConsoleTab(String tabName, String tabId) {
 
+
         Tab tab = new Tab();
         tab.setText(tabName);
         tab.setClosable(true);
@@ -284,17 +293,20 @@ public class MysqlTabpaneController implements Initializable {
         ComboBox<String> tablesCombBox = new ComboBox<>();
 
         //展示所有数据库
-        List<String> databases = ConnectionPool.getDatabases(tabId);
+        List<String> databases = mysqlService.getDatabases(tabId);
         ListView<Label> listView = new ListView<>();
         tablesCombBox.setOnAction(event -> {
             listView.getItems().remove(0, listView.getItems().size());
             String tableName = tablesCombBox.getSelectionModel().getSelectedItem();
-            List<String> tables = ConnectionPool.getTablesOfDatabase(tableName, tabId);
+            List<String> tables = mysqlService.getTablesOfDatabase(tableName, tabId);
             for (String table : tables) {
                 listView.getItems().addAll(new Label(table));
             }
         });
+        listView.setOnMouseClicked(event -> {
+            Label label = listView.getSelectionModel().getSelectedItem();
 
+        });
         for (String database : databases) {
             tablesCombBox.getItems().add(database);
         }

@@ -7,10 +7,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="connect-all" />
+        <module name="xJavaFxTool" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="connect-all" target="1.8" />
+      <module name="xJavaFxTool" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
