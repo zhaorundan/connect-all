@@ -39,21 +39,6 @@ public class MainApp extends AbstractJavaFxApplicationSupport {
         });
     }
 
-    public void initRootLayout() {
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("/org/jordan/app/connect/fxml/Main.fxml"));
-            rootLayout = loader.load();
-            Scene scene = new Scene(rootLayout);
-            primaryStage.setScene(scene);
-            primaryStage.show();
-            MainController mainController = loader.getController();
-            mainController.setMainBorderPane(rootLayout);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     private void initRootLayoutForController() {
 

@@ -283,39 +283,42 @@ public class MysqlTabpaneController implements Initializable {
         tab.setText(tabName);
         tab.setClosable(true);
         tab.setId(tabId);
-
-        SplitPane splitPane = new SplitPane();
-        AnchorPane left = new AnchorPane();
-        AnchorPane right = new AnchorPane();
-
-        VBox vBox = new VBox();
-        TextField textField = new TextField();
-        ComboBox<String> tablesCombBox = new ComboBox<>();
-
-        //展示所有数据库
-        List<String> databases = mysqlService.getDatabases(tabId);
-        ListView<Label> listView = new ListView<>();
-        tablesCombBox.setOnAction(event -> {
-            listView.getItems().remove(0, listView.getItems().size());
-            String tableName = tablesCombBox.getSelectionModel().getSelectedItem();
-            List<String> tables = mysqlService.getTablesOfDatabase(tableName, tabId);
-            for (String table : tables) {
-                listView.getItems().addAll(new Label(table));
-            }
-        });
-        listView.setOnMouseClicked(event -> {
-            Label label = listView.getSelectionModel().getSelectedItem();
-
-        });
-        for (String database : databases) {
-            tablesCombBox.getItems().add(database);
-        }
-
-        vBox.getChildren().addAll(textField, tablesCombBox, listView);
-
-        left.getChildren().add(vBox);
-        splitPane.getItems().addAll(left, right);
-        tab.setContent(splitPane);
+//
+//        SplitPane splitPane = new SplitPane();
+//        AnchorPane left = new AnchorPane();
+//        AnchorPane right = new AnchorPane();
+//
+//        VBox vBox = new VBox();
+//        TextField textField = new TextField();
+//        ComboBox<String> tablesCombBox = new ComboBox<>();
+//
+//        //展示所有数据库
+//        List<String> databases = mysqlService.getDatabases(tabId);
+//        ListView<Label> listView = new ListView<>();
+//        tablesCombBox.setOnAction(event -> {
+//            listView.getItems().remove(0, listView.getItems().size());
+//            String tableName = tablesCombBox.getSelectionModel().getSelectedItem();
+//            List<String> tables = mysqlService.getTablesOfDatabase(tableName, tabId);
+//            for (String table : tables) {
+//                listView.getItems().addAll(new Label(table));
+//            }
+//        });
+//        listView.setOnMouseClicked(event -> {
+//            Label label = listView.getSelectionModel().getSelectedItem();
+//
+//        });
+//        for (String database : databases) {
+//            tablesCombBox.getItems().add(database);
+//        }
+//
+//        vBox.getChildren().addAll(textField, tablesCombBox, listView);
+//
+//        left.getChildren().add(vBox);
+//        splitPane.getItems().addAll(left, right);
+        AnchorPane anchorPane = (AnchorPane)mysqlConsoleView.getView();
+        anchorPane.setId(tabId);
+        tab.setContent(anchorPane);
+        mysqlTabpane.getTabs().add(tab);
         return tab;
     }
 
