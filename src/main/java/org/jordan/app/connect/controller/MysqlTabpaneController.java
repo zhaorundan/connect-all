@@ -10,6 +10,8 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.jordan.app.connect.connector.ConnectionConfigs;
@@ -66,15 +68,18 @@ public class MysqlTabpaneController implements Initializable {
     @FXML
     private Label configId;
 
+
     @FXML
     private TabPane mysqlTabpane;
-    @FXML
+    @Setter @Getter
     private Tab mysqlTab;
 
     @Resource
     private MysqlServiceImpl mysqlService;
     @Resource
     private MysqlConsoleView mysqlConsoleView;
+    @Resource
+    private MysqlConsoleController mysqlConsoleController;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
@@ -277,12 +282,13 @@ public class MysqlTabpaneController implements Initializable {
     }
 
     public Tab addConsoleTab(String tabName, String tabId) {
-
-
         Tab tab = new Tab();
         tab.setText(tabName);
         tab.setClosable(true);
-        tab.setId(tabId);
+        tab.setOnClosed(event -> {
+            mysqlTabpane.getTabs().clear();
+        });
+//        tab.setId(tabId);
 //
 //        SplitPane splitPane = new SplitPane();
 //        AnchorPane left = new AnchorPane();
@@ -315,6 +321,7 @@ public class MysqlTabpaneController implements Initializable {
 //
 //        left.getChildren().add(vBox);
 //        splitPane.getItems().addAll(left, right);
+        mysqlConsoleController.setConfigId(tabId);
         AnchorPane anchorPane = (AnchorPane)mysqlConsoleView.getView();
         anchorPane.setId(tabId);
         tab.setContent(anchorPane);

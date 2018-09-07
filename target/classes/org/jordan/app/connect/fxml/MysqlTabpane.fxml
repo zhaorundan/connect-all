@@ -2,81 +2,74 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<TabPane prefHeight="519.0" prefWidth="599.0" side="BOTTOM" tabClosingPolicy="ALL_TABS" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jordan.app.connect.controller.MysqlTabpaneController">
-
-    <tabs>
-        <Tab closable="true" text="mysql" fx:id="mysqlTab">
-            <content>
-
-                <TabPane fx:id="mysqlTabpane" tabClosingPolicy="UNAVAILABLE">
-                    <tabs>
-                        <Tab text="Connections">
-                            <content>
-                                <SplitPane dividerPositions="0.3088480801335559">
-                                    <items>
-                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="214.0" prefWidth="121.0" SplitPane.resizableWithParent="false">
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jordan.app.connect.controller.MysqlTabpaneController">
+    <children>
+        <TabPane fx:id="mysqlTabpane" >
+            <tabs>
+                <Tab text="Connections">
+                    <content>
+                        <SplitPane dividerPositions="0.3088480801335559">
+                            <items>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="214.0" prefWidth="121.0" SplitPane.resizableWithParent="false">
+                                    <children>
+                                        <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             <children>
-                                                <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <ListView fx:id="mysqlListview" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#clickview" prefHeight="372.0" prefWidth="167.0" VBox.vgrow="ALWAYS" />
+                                                <HBox prefHeight="30.0" prefWidth="100.0" VBox.vgrow="NEVER">
                                                     <children>
-                                                        <ListView fx:id="mysqlListview" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#clickview" prefHeight="372.0" prefWidth="167.0" VBox.vgrow="ALWAYS" />
-                                                        <HBox prefHeight="30.0" prefWidth="100.0" VBox.vgrow="NEVER">
-                                                            <children>
-                                                                <Button fx:id="mysqlCreate" mnemonicParsing="false" onAction="#addConfig" text="create" />
-                                                                <Button mnemonicParsing="false" text="Button" />
-                                                                <Button mnemonicParsing="false" text="Button" />
-                                                            </children>
-                                                        </HBox>
+                                                        <Button fx:id="mysqlCreate" mnemonicParsing="false" onAction="#addConfig" text="create" />
+                                                        <Button mnemonicParsing="false" text="Button" />
+                                                        <Button mnemonicParsing="false" text="Button" />
                                                     </children>
-                                                </VBox>
+                                                </HBox>
                                             </children>
-                                        </AnchorPane>
-                                        <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                                        </VBox>
+                                    </children>
+                                </AnchorPane>
+                                <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                                    <children>
+                                        <GridPane hgap="1.0" vgap="2.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="80.0" BorderPane.alignment="CENTER">
+                                            <columnConstraints>
+                                                <ColumnConstraints />
+                                                <ColumnConstraints fillWidth="false" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints maxHeight="32.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="31.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
                                             <children>
-                                                <GridPane hgap="1.0" vgap="2.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="80.0" BorderPane.alignment="CENTER">
-                                                    <columnConstraints>
-                                                        <ColumnConstraints />
-                                                        <ColumnConstraints fillWidth="false" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" />
-                                                    </columnConstraints>
-                                                    <rowConstraints>
-                                                        <RowConstraints maxHeight="32.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
-                                                        <RowConstraints maxHeight="31.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
-                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                    </rowConstraints>
-                                                    <children>
-                                                        <TextField fx:id="connName" prefHeight="27.0" prefWidth="236.0" GridPane.columnIndex="1" />
-                                                        <Label fx:id="name" text="Name:" />
-                                                        <Label text="Host:" GridPane.rowIndex="1" />
-                                                        <TextField fx:id="host" prefHeight="27.0" prefWidth="236.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                        <Label text="Username:" GridPane.rowIndex="2" />
-                                                        <TextField fx:id="userName" prefWidth="236.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                                        <Label text="Password:" GridPane.rowIndex="3" />
-                                                        <Label text="Database:" GridPane.rowIndex="4" />
-                                                        <TextField fx:id="database" prefWidth="236.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                                        <PasswordField fx:id="password" prefWidth="236.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                                        <Label text="Port:" GridPane.rowIndex="5" />
-                                                        <PasswordField fx:id="port" prefWidth="236.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                                        <CheckBox fx:id="isSSL" mnemonicParsing="false" text="is SSL" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                                                        <Label fx:id="configId" text="" GridPane.rowIndex="6" />
-                                                    </children>
-                                                </GridPane>
-                                                <Button fx:id="connButton" layoutX="113.0" layoutY="411.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#connectTest" text="connect test" BorderPane.alignment="CENTER" />
-                                                <Button fx:id="saveButton" layoutX="219.0" layoutY="411.0" mnemonicParsing="false" onAction="#saveConfig" text="save" />
-                                                <Button fx:id="resetButton" layoutX="287.0" layoutY="411.0" mnemonicParsing="false" onAction="#resetConfig" text="reset" />
-
+                                                <TextField fx:id="connName" prefHeight="27.0" prefWidth="236.0" GridPane.columnIndex="1" />
+                                                <Label fx:id="name" text="Name:" />
+                                                <Label text="Host:" GridPane.rowIndex="1" />
+                                                <TextField fx:id="host" prefHeight="27.0" prefWidth="236.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                <Label text="Username:" GridPane.rowIndex="2" />
+                                                <TextField fx:id="userName" prefWidth="236.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                <Label text="Password:" GridPane.rowIndex="3" />
+                                                <Label text="Database:" GridPane.rowIndex="4" />
+                                                <TextField fx:id="database" prefWidth="236.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                                <PasswordField fx:id="password" prefWidth="236.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                <Label text="Port:" GridPane.rowIndex="5" />
+                                                <PasswordField fx:id="port" prefWidth="236.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                                <CheckBox fx:id="isSSL" mnemonicParsing="false" text="is SSL" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                                <Label fx:id="configId" text="" GridPane.rowIndex="6" />
                                             </children>
-                                        </AnchorPane>
-                                    </items>
-                                </SplitPane>
-                            </content>
-                        </Tab>
-                    </tabs>
-                </TabPane>
+                                        </GridPane>
+                                        <Button fx:id="connButton" layoutX="113.0" layoutY="411.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#connectTest" text="connect test" BorderPane.alignment="CENTER" />
+                                        <Button fx:id="saveButton" layoutX="219.0" layoutY="411.0" mnemonicParsing="false" onAction="#saveConfig" text="save" />
+                                        <Button fx:id="resetButton" layoutX="287.0" layoutY="411.0" mnemonicParsing="false" onAction="#resetConfig" text="reset" />
 
-            </content>
-        </Tab>
-    </tabs>
-</TabPane>
+                                          </children>
+                                </AnchorPane>
+                            </items>
+                        </SplitPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>
+</AnchorPane>

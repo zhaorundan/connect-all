@@ -1,16 +1,11 @@
 package org.jordan.app.connect;
 
 import de.felixroske.jfxsupport.AbstractJavaFxApplicationSupport;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import org.jordan.app.connect.controller.MainController;
 import org.jordan.app.connect.view.MainView;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.io.IOException;
 
 /**
  * @author zhaord
