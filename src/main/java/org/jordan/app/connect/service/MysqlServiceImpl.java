@@ -33,7 +33,7 @@ public class MysqlServiceImpl {
         return false;
     }
 
-    public  List<String> getDatabases(String jdbcId) {
+    public  List<String> listDatabases(String jdbcId) {
         Connection connection = connections.getConnection( ConnectionConfigs.mysqlConfigs.get(jdbcId));
         List<String> databases = Lists.newArrayList();
         try {
@@ -48,13 +48,12 @@ public class MysqlServiceImpl {
         return databases;
     }
 
-    public  List<String> getTablesOfDatabase(String database, String jdbcId) {
+    public  List<String> listTablesOfDatabase(String database, String jdbcId) {
         List<String> tables = Lists.newArrayList();
         Connection connection = connections.getPool().get(jdbcId);
         try {
             ResultSet set = connection.getMetaData().getTables(database, null, null, new String[]{"TABLE"});
             while (set.next()) {
-
                 tables.add(set.getString("TABLE_NAME"));
             }
         } catch (SQLException e) {
@@ -63,7 +62,13 @@ public class MysqlServiceImpl {
         return tables;
     }
 
-    public void getPagingDataOfTable(String jdbcId,String database,String table) {
+    /**
+     * 查询表内容
+     * @param jdbcId
+     * @param database
+     * @param table
+     */
+    public void listPagingDataOfTable(String jdbcId, String database, String table) {
         Connection connection = connections.getPool().get(jdbcId);
         try {
             DatabaseMetaData meta = connection.getMetaData();
@@ -71,6 +76,26 @@ public class MysqlServiceImpl {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * 获取表的所有列
+     * @param jdbcId
+     * @param tableName
+     * @return
+     */
+    public List<String> listColumnOfTable(String jdbcId, String database,String tableName) {
+        List<String> columns = Lists.newArrayList();
+        Connection connection = connections.getPool().get(jdbcId);
+        try {
+            ResultSet set = connection.getMetaData().getColumns(database, null, tableName, null);
+            while (set.next()) {
+                columns.add(set.getString("COLUMN_NAME"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return columns;
     }
 
 }

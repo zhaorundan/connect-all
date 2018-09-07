@@ -71,6 +71,7 @@ public class MysqlTabpaneController implements Initializable {
 
     @FXML
     private TabPane mysqlTabpane;
+
     @Setter @Getter
     private Tab mysqlTab;
 
@@ -281,50 +282,23 @@ public class MysqlTabpaneController implements Initializable {
         return jdbcParam;
     }
 
-    public Tab addConsoleTab(String tabName, String tabId) {
+    public Tab addConsoleTab(String tabName, String jdbcId) {
         Tab tab = new Tab();
         tab.setText(tabName);
         tab.setClosable(true);
         tab.setOnClosed(event -> {
             mysqlTabpane.getTabs().clear();
         });
-//        tab.setId(tabId);
-//
-//        SplitPane splitPane = new SplitPane();
-//        AnchorPane left = new AnchorPane();
-//        AnchorPane right = new AnchorPane();
-//
-//        VBox vBox = new VBox();
-//        TextField textField = new TextField();
-//        ComboBox<String> tablesCombBox = new ComboBox<>();
-//
-//        //展示所有数据库
-//        List<String> databases = mysqlService.getDatabases(tabId);
-//        ListView<Label> listView = new ListView<>();
-//        tablesCombBox.setOnAction(event -> {
-//            listView.getItems().remove(0, listView.getItems().size());
-//            String tableName = tablesCombBox.getSelectionModel().getSelectedItem();
-//            List<String> tables = mysqlService.getTablesOfDatabase(tableName, tabId);
-//            for (String table : tables) {
-//                listView.getItems().addAll(new Label(table));
-//            }
-//        });
-//        listView.setOnMouseClicked(event -> {
-//            Label label = listView.getSelectionModel().getSelectedItem();
-//
-//        });
-//        for (String database : databases) {
-//            tablesCombBox.getItems().add(database);
-//        }
-//
-//        vBox.getChildren().addAll(textField, tablesCombBox, listView);
-//
-//        left.getChildren().add(vBox);
-//        splitPane.getItems().addAll(left, right);
-        mysqlConsoleController.setConfigId(tabId);
+
         AnchorPane anchorPane = (AnchorPane)mysqlConsoleView.getView();
-        anchorPane.setId(tabId);
+        anchorPane.setId(jdbcId);
+        Label hiddenDomain = new Label();
+        hiddenDomain.setId("jdbcId");
+        hiddenDomain.setText(jdbcId);
+        hiddenDomain.setVisible(false);
+        anchorPane.getChildren().add(hiddenDomain);
         tab.setContent(anchorPane);
+
         mysqlTabpane.getTabs().add(tab);
         return tab;
     }
