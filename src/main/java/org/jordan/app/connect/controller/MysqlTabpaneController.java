@@ -286,20 +286,20 @@ public class MysqlTabpaneController implements Initializable {
         Tab tab = new Tab();
         tab.setText(tabName);
         tab.setClosable(true);
+        tab.setId("tab"+jdbcId);
         tab.setOnClosed(event -> {
             mysqlTabpane.getTabs().clear();
         });
 
         AnchorPane anchorPane = (AnchorPane)mysqlConsoleView.getView();
         anchorPane.setId(jdbcId);
-        Label hiddenDomain = new Label();
-        hiddenDomain.setId("jdbcId");
-        hiddenDomain.setText(jdbcId);
-        hiddenDomain.setVisible(false);
-        anchorPane.getChildren().add(hiddenDomain);
         tab.setContent(anchorPane);
 
+        mysqlConsoleController.setJdbcId(jdbcId);
+
         mysqlTabpane.getTabs().add(tab);
+        mysqlConsoleController.initData();
+        mysqlConsoleController.initView();
         return tab;
     }
 
