@@ -1,15 +1,14 @@
 package org.jordan.app.connect.controller;
 
-import de.felixroske.jfxsupport.FXMLController;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import lombok.Getter;
@@ -17,9 +16,8 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.jordan.app.connect.connector.Connections;
 import org.jordan.app.connect.service.MysqlServiceImpl;
-import org.jordan.app.connect.view.MysqlQueryView;
+import org.jordan.app.connect.view.MysqlConsoleView;
 
-import javax.annotation.Resource;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -32,43 +30,15 @@ import java.util.ResourceBundle;
  * @Description:
  * @date 2018/8/28下午12:45
  */
-//@Scope("prototype")
 @Slf4j
-@FXMLController
-public class MysqlConsoleController implements Initializable {
-    @FXML
-    private ComboBox<String> databaseList;
-    @FXML
-    private TextField searchTable;
-    @FXML
-    private ListView<Label> tableList;
-    @FXML
-    private TabPane mysqlTabpane;
-
-    @Resource
-    private MysqlServiceImpl mysqlService;
-
-    @FXML
-    private TableView  tableView;
+public class MysqlConsoleController  extends MysqlConsoleView {
+    private MysqlServiceImpl mysqlService = new MysqlServiceImpl();
 
     @Getter
     @Setter
     private String jdbcId;
 
-    @Resource
-    private Connections connections;
-    @FXML
-    private Button contentButton;
-    @FXML
-    private Button queryButton;
-
-
-    @Resource
-    private MysqlQueryController mysqlQueryController;
-    @Resource
-    private MysqlQueryView mysqlQueryView;
-    @FXML
-    private Pane mainPane;
+    private ObservableList<ObservableList> data = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -77,8 +47,11 @@ public class MysqlConsoleController implements Initializable {
 
     }
 
-    public void initView() {
-        VBox vBox = (VBox) mysqlQueryView.getView();
+    public void initView() throws Exception{
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/MysqlQuery.fxml"));
+        AnchorPane vBox  = fxmlLoader.load();
+
         mainPane.getChildren().add(vBox);
         vBox.setVisible(false);
 
@@ -94,25 +67,32 @@ public class MysqlConsoleController implements Initializable {
                 vBox.setVisible(true);
             }
         });
+        MysqlQueryController controller = fxmlLoader.getController();
+        controller.setMysqlConsoleController(this);
+
     }
 
+    private ObservableList<Label> tableData = FXCollections.observableArrayList();
     public void initData() {
         //展示所有数据库
         List<String> databases = mysqlService.listDatabases(jdbcId);
         databaseList.setOnAction(event -> {
-            tableList.getItems().remove(0, tableList.getItems().size());
-            String tableName = databaseList.getSelectionModel().getSelectedItem();
-            List<String> tables = mysqlService.listTablesOfDatabase(tableName, jdbcId);
+            tableList.getItems().clear();
+            String database = getDatabase();
+            List<String> tables = mysqlService.listTablesOfDatabase(database, jdbcId);
+            tableData.clear();
             for (String table : tables) {
                 Label label = new Label();
                 label.setText(table);
-                tableList.getItems().addAll(label);
+                tableData.add(label);
             }
+            tableList.getItems().addAll(tableData);
         });
         tableList.setOnMouseClicked(event -> {
-            tableView.getColumns().remove(0,tableView.getColumns().size());
-            String tableName = getTableName();
-            buildTableview(tableName);
+            tableView.getColumns().clear();
+            tableView.getItems().clear();
+            data.clear();
+            buildTableview();
         });
 
         for (String database : databases) {
@@ -128,36 +108,42 @@ public class MysqlConsoleController implements Initializable {
     public String getDatabase() {
         return databaseList.getSelectionModel().getSelectedItem();
     }
-    private void buildTableview(String tableName) {
+    private void buildTableview() {
         String database = getDatabase();
-        String sql = "select * from "+database+"."+tableName+" limit 100";
-        Connection connection = connections.getPool().get(jdbcId);
+        String tableName = getTableName();
+        String sql = "select * from `" + database + "`." + tableName + " limit 30";
+        Connection connection = Connections.getConnection(jdbcId);
+
         try {
             ResultSet rs = connection.createStatement().executeQuery(sql);
-            ObservableList<ObservableList> data = FXCollections.observableArrayList();
-            for(int i=0 ; i<rs.getMetaData().getColumnCount(); i++){
+
+            for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
                 //We are using non property style for making dynamic table
                 final int j = i;
-                TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i+1));
+                TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i + 1));
 
-                col.setCellValueFactory(new Callback<CellDataFeatures<ObservableList,String>,ObservableValue<String>>(){
+                col.setCellValueFactory(new Callback<CellDataFeatures<ObservableList, String>, ObservableValue<String>>() {
                     @Override
                     public ObservableValue<String> call(TableColumn.CellDataFeatures<ObservableList, String> param) {
                         return new SimpleStringProperty(param.getValue().get(j).toString());
                     }
                 });
 
-                tableView.getColumns().addAll(col);
-                log.info("Column [{}] ",i);
+                tableView.getColumns().add(col);
+                if (log.isDebugEnabled()) {
+                    log.debug("Column [{}] ", i);
+                }
             }
-            while(rs.next()){
+            while (rs.next()) {
                 //Iterate Row
                 ObservableList<String> row = FXCollections.observableArrayList();
-                for(int i=1 ; i<=rs.getMetaData().getColumnCount(); i++){
+                for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
                     //Iterate Column
                     row.add(rs.getString(i));
                 }
-                System.out.println("Row [1] added "+row );
+                if (log.isDebugEnabled()) {
+                    log.debug("Row [1] added {} " , row);
+                }
                 data.add(row);
 
             }
@@ -165,33 +151,7 @@ public class MysqlConsoleController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        // add columns
-//        List<String> columnNames = mysqlService.listColumnOfTable(jdbcId, database, tableName);
-//        for (int i = 0; i < columnNames.size(); i++) {
-//            final int finalIdx = i;
-//            TableColumn<ObservableList<String>, String> column = new TableColumn<>(
-//                    columnNames.get(i)
-//            );
-//            column.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue().get(finalIdx))
-//            );
-//            tableView.getColumns().add(column);
-//        }
-//        StringBuilder sb = new StringBuilder();
-//        for (String columnName : columnNames) {
-//
-//        }
-
-//        // add data
-//        for (int i = 0; i < N_ROWS; i++) {
-//            tableView.getItems().add(
-//                    FXCollections.observableArrayList(
-//                            dataGenerator.getNext(N_COLS)
-//                    )
-//            );
-//        }
-
     }
-    
-   
+
 
 }

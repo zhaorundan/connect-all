@@ -2,6 +2,7 @@ package org.jordan.app.connect.service;
 
 
 import com.google.common.collect.Lists;
+import lombok.Synchronized;
 import org.jordan.app.connect.connector.ConnectionConfigs;
 import org.jordan.app.connect.connector.Connections;
 import org.jordan.app.connect.model.JDBCParam;
@@ -19,13 +20,10 @@ import java.util.List;
  * @Description:
  * @date 2018/8/23下午10:50
  */
-@Service("mysqlService")
 public class MysqlServiceImpl {
-    @Resource
-    private Connections connections;
 
-    public boolean testConnection(JDBCParam jdbcParam) throws Exception{
-        Connection conn = connections.getConnection(jdbcParam);
+    public boolean testConnection(JDBCParam jdbcParam) throws Exception {
+        Connection conn = Connections.getConnection(jdbcParam);
         ResultSet rs = conn.createStatement().executeQuery("select 1");
         if (rs.next()) {
             return true;
@@ -33,8 +31,8 @@ public class MysqlServiceImpl {
         return false;
     }
 
-    public  List<String> listDatabases(String jdbcId) {
-        Connection connection = connections.getConnection( ConnectionConfigs.mysqlConfigs.get(jdbcId));
+    public List<String> listDatabases(String jdbcId) {
+        Connection connection = Connections.getConnection(ConnectionConfigs.mysqlConfigs.get(jdbcId));
         List<String> databases = Lists.newArrayList();
         try {
             ResultSet resultSet = connection.getMetaData().getCatalogs();
@@ -48,9 +46,9 @@ public class MysqlServiceImpl {
         return databases;
     }
 
-    public  List<String> listTablesOfDatabase(String database, String jdbcId) {
+    public List<String> listTablesOfDatabase(String database, String jdbcId) {
         List<String> tables = Lists.newArrayList();
-        Connection connection = connections.getPool().get(jdbcId);
+        Connection connection = Connections.getPool().get(jdbcId);
         try {
             ResultSet set = connection.getMetaData().getTables(database, null, null, new String[]{"TABLE"});
             while (set.next()) {
@@ -64,12 +62,13 @@ public class MysqlServiceImpl {
 
     /**
      * 查询表内容
+     *
      * @param jdbcId
      * @param database
      * @param table
      */
     public void listPagingDataOfTable(String jdbcId, String database, String table) {
-        Connection connection = connections.getPool().get(jdbcId);
+        Connection connection = Connections.getPool().get(jdbcId);
         try {
             DatabaseMetaData meta = connection.getMetaData();
 
@@ -80,13 +79,14 @@ public class MysqlServiceImpl {
 
     /**
      * 获取表的所有列
+     *
      * @param jdbcId
      * @param tableName
      * @return
      */
-    public List<String> listColumnOfTable(String jdbcId, String database,String tableName) {
+    public List<String> listColumnOfTable(String jdbcId, String database, String tableName) {
         List<String> columns = Lists.newArrayList();
-        Connection connection = connections.getPool().get(jdbcId);
+        Connection connection = Connections.getPool().get(jdbcId);
         try {
             ResultSet set = connection.getMetaData().getColumns(database, null, tableName, null);
             while (set.next()) {
@@ -97,7 +97,6 @@ public class MysqlServiceImpl {
         }
         return columns;
     }
-
 
 
 }

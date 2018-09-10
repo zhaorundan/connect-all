@@ -1,14 +1,12 @@
 package org.jordan.app.connect.connector;
 
-import com.google.common.collect.Lists;
 import lombok.Getter;
+import org.apache.commons.lang3.StringUtils;
 import org.jordan.app.connect.exception.JDBCException;
 import org.jordan.app.connect.model.JDBCParam;
-import org.jordan.app.connect.utils.StringUtils;
 import org.springframework.stereotype.Component;
 
 import java.sql.*;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -17,13 +15,11 @@ import java.util.concurrent.ConcurrentHashMap;
  * @Description:
  * @date 2018/8/27下午7:12
  */
-@Component
-@Getter
 public class Connections {
-    private Map<String, Connection> pool = new ConcurrentHashMap<>();
+    private static Map<String, Connection> pool = new ConcurrentHashMap<>();
 
+    public static Connection getConnection(JDBCParam jdbcParam) {
 
-    public  Connection getConnection(JDBCParam jdbcParam) {
         Connection connection = pool.get(jdbcParam.getId());
         if (connection == null) {
             connection = createConnection(jdbcParam);
@@ -32,8 +28,17 @@ public class Connections {
         return connection;
     }
 
+    public static Map<String, Connection> getPool() {
+        return pool;
+    }
 
-    private  Connection createConnection(JDBCParam jdbcParam)  {
+    public static Connection getConnection(String jdbcId) {
+        JDBCParam jdbcParam = ConnectionConfigs.mysqlConfigs.get(jdbcId);
+        return getConnection(jdbcParam);
+    }
+
+
+    private  static Connection createConnection(JDBCParam jdbcParam)  {
         Connection conn = null ;
         String url = "jdbc:mysql://"+jdbcParam.getHost()+":"+jdbcParam.getPort();
         if (StringUtils.isNotBlank(jdbcParam.getDatebase())) {

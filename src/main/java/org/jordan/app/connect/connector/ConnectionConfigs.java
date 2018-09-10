@@ -7,6 +7,4 @@ import java.util.Map;
 
 public class ConnectionConfigs {
     public static Map<String, JDBCParam> mysqlConfigs = Maps.newHashMap();
-
-
 }

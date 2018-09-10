@@ -19,6 +19,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.jordan.app.connect.connector.Connections;
+import org.jordan.app.connect.view.MysqlQueryView;
 
 import javax.annotation.Resource;
 import java.net.URL;
@@ -33,8 +34,7 @@ import java.util.ResourceBundle;
  * @date 2018/9/8上午10:33
  */
 @Slf4j
-@FXMLController
-public class MysqlQueryController implements Initializable {
+public class MysqlQueryController extends MysqlQueryView {
     @Getter
     @FXML
     private VBox queryArea;
@@ -45,17 +45,15 @@ public class MysqlQueryController implements Initializable {
     @FXML
     private TableView queryResult;
 
-    @Resource
-    private Connections connections;
-
-
-    @Resource
+    @Setter
     private MysqlConsoleController mysqlConsoleController;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         runQuery.setOnMouseClicked(event -> {
-            queryResult.getColumns().remove(0,queryResult.getColumns().size());
+            queryResult.getColumns().removeAll();
+            queryResult.getItems().removeAll();
+            queryResult.refresh();
             executeQuery();
         });
     }
@@ -64,7 +62,7 @@ public class MysqlQueryController implements Initializable {
         String sql = queryText.getText();
         String jdbcId = mysqlConsoleController.getJdbcId();
         String database = mysqlConsoleController.getDatabase();
-        Connection connection = connections.getPool().get(jdbcId);
+        Connection connection = Connections.getPool().get(jdbcId);
         try {
             connection.createStatement().executeQuery("use " + database);
             ResultSet rs = connection.createStatement().executeQuery(sql);

@@ -1,18 +1,15 @@
 package org.jordan.app.connect.controller;
 
-import de.felixroske.jfxsupport.FXMLController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Side;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import org.jordan.app.connect.view.MysqlTabpaneView;
+import org.jordan.app.connect.view.MainView;
 
-import javax.annotation.Resource;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -21,32 +18,21 @@ import java.util.ResourceBundle;
  * @Description:
  * @date 2018/8/22下午5:44
  */
-@FXMLController
-public class MainController implements Initializable {
-    @Resource
-    private MysqlTabpaneView mysqlTabpaneView;
-    @FXML
-    private BorderPane mainBorderPane;
-    @FXML
-    private MenuItem addMysql;
-    @FXML
-    private MenuItem addRedis;
-    @FXML
-    private MenuItem addMongo;
-    @FXML
-    private MenuItem addZookeeper;
+public class MainController extends MainView {
 
-    private TabPane mainTabpaen = new TabPane();
+    private TabPane mainTabpane = new TabPane();
 
-    @Resource
-    private MysqlTabpaneController mysqlTabpaneController;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        mainTabpaen.setId("mysqlTabpane");
-        mainTabpaen.setSide(Side.BOTTOM);
+        mainTabpane.setId("mysqlTabpane");
+        mainTabpane.setSide(Side.BOTTOM);
 
         addMysql.setOnAction((ActionEvent event)->{
-            addMysqlTab(event,"MySql");
+            try {
+                addMysqlTab(event,"MySql");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
         addMongo.setOnAction((ActionEvent event)->{
@@ -63,33 +49,33 @@ public class MainController implements Initializable {
         redisTab.setId("redis");
         redisTab.setText("redis");
         redisTab.setClosable(true);
-        mainTabpaen.getTabs().add(redisTab);
+        mainTabpane.getTabs().add(redisTab);
         redisTab.setOnClosed(event1 -> {
-            mainTabpaen.getTabs().clear();
+            mainTabpane.getTabs().clear();
         });
         if (mainBorderPane.getCenter() == null) {
-            mainBorderPane.setCenter(mainTabpaen);
+            mainBorderPane.setCenter(mainTabpane);
         }
-
     }
 
 
-    public void addMysqlTab(ActionEvent event,String text) {
+    public void addMysqlTab(ActionEvent event,String text) throws Exception {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/MysqlTabpane.fxml"));
+        AnchorPane anchorPane = fxmlLoader.load();
+        MysqlTabpaneController mysqlTabpaneController = fxmlLoader.getController();
         Tab mysqlTab = new Tab();
         mysqlTab.setId("mysql");
         mysqlTab.setText("mysql");
         mysqlTab.setClosable(true);
-        mysqlTabpaneController.setMysqlTab(mysqlTab);
-//        mysqlTabpaneController.setMysqlTabpane(mysqlTabpane);
-        AnchorPane anchorPane = (AnchorPane) mysqlTabpaneView.getView();
         mysqlTab.setContent(anchorPane);
-        mainTabpaen.getTabs().add(mysqlTab);
+        mainTabpane.getTabs().add(mysqlTab);
         if (mainBorderPane.getCenter() == null) {
-            mainBorderPane.setCenter(mainTabpaen);
+            mainBorderPane.setCenter(mainTabpane);
         }
         mysqlTab.setOnClosed(event1 -> {
-            mainTabpaen.getTabs().clear();
+            mainTabpane.getTabs().clear();
         });
+        mainTabpane.getSelectionModel().select(mysqlTab);
     }
 
     @FXML

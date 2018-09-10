@@ -40,7 +40,7 @@
                <center>
                   <Pane fx:id="mainPane">
                      <children>
-                        <TableView fx:id="tableView" maxHeight="1.7976931348623157E308" prefHeight="529.0" prefWidth="538.0" />
+                        <TableView fx:id="tableView" maxHeight="1.7976931348623157E308" prefHeight="529.0" prefWidth="538.0"/>
                      </children>
                   </Pane>
                </center>

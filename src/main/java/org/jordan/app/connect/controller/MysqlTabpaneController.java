@@ -1,34 +1,30 @@
 package org.jordan.app.connect.controller;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import de.felixroske.jfxsupport.FXMLController;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import lombok.Getter;
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.jordan.app.connect.connector.ConnectionConfigs;
-import org.jordan.app.connect.connector.Connections;
-import org.jordan.app.connect.service.MysqlServiceImpl;
 import org.jordan.app.connect.model.JDBCParam;
+import org.jordan.app.connect.service.MysqlServiceImpl;
 import org.jordan.app.connect.utils.MyFileUtils;
 import org.jordan.app.connect.utils.ShortUUID;
-import org.jordan.app.connect.utils.StringUtils;
 import org.jordan.app.connect.utils.XmlUtils;
-import org.jordan.app.connect.view.MysqlConsoleView;
+import org.jordan.app.connect.view.MysqlTabpaneView;
 
-import javax.annotation.Resource;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.*;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ResourceBundle;
 
 /**
  * @author zhaord
@@ -36,8 +32,7 @@ import java.util.*;
  * @date 2018/8/23上午9:22
  */
 @Slf4j
-@FXMLController
-public class MysqlTabpaneController implements Initializable {
+public class MysqlTabpaneController extends MysqlTabpaneView {
 
     @FXML
     private Button mysqlCreate;
@@ -72,15 +67,7 @@ public class MysqlTabpaneController implements Initializable {
     @FXML
     private TabPane mysqlTabpane;
 
-    @Setter @Getter
-    private Tab mysqlTab;
-
-    @Resource
-    private MysqlServiceImpl mysqlService;
-    @Resource
-    private MysqlConsoleView mysqlConsoleView;
-    @Resource
-    private MysqlConsoleController mysqlConsoleController;
+    private MysqlServiceImpl mysqlService = new MysqlServiceImpl();
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
@@ -90,7 +77,7 @@ public class MysqlTabpaneController implements Initializable {
         }
         ContextMenu menu = new ContextMenu();
         MenuItem delete = new MenuItem("Delete");
-        MenuItem open = new MenuItem("open");
+        MenuItem open = new MenuItem("Open");
 
         menu.getItems().addAll(delete,open);
         mysqlListview.setContextMenu(menu);
@@ -103,12 +90,11 @@ public class MysqlTabpaneController implements Initializable {
 
         open.setOnAction( event -> {
             Label label = mysqlListview.getSelectionModel().getSelectedItem();
-            Tab tab = addConsoleTab(label.getText(), label.getId());
-            mysqlTabpane.getTabs().add(tab);
-        });
-
-        mysqlTab.setOnClosed(event -> {
-            log.info("msyql tab closed");
+            try {
+                addConsoleTab(label.getText(), label.getId());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
     }
@@ -282,26 +268,29 @@ public class MysqlTabpaneController implements Initializable {
         return jdbcParam;
     }
 
-    public Tab addConsoleTab(String tabName, String jdbcId) {
+    public Tab addConsoleTab(String tabName, String jdbcId) throws Exception {
         Tab tab = new Tab();
         tab.setText(tabName);
         tab.setClosable(true);
         tab.setId("tab"+jdbcId);
         tab.setOnClosed(event -> {
-            mysqlTabpane.getTabs().clear();
+//            mysqlTabpane.getTabs().clear();
         });
 
-        AnchorPane anchorPane = (AnchorPane)mysqlConsoleView.getView();
-        anchorPane.setId(jdbcId);
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/MysqlConsole.fxml"));
+        AnchorPane anchorPane = fxmlLoader.load();
+        MysqlConsoleController consoleController = fxmlLoader.getController();
+        consoleController.setJdbcId(jdbcId);
+
         tab.setContent(anchorPane);
 
-        mysqlConsoleController.setJdbcId(jdbcId);
+        consoleController.setJdbcId(jdbcId);
 
         mysqlTabpane.getTabs().add(tab);
-        mysqlConsoleController.initData();
-        mysqlConsoleController.initView();
+        mysqlTabpane.getSelectionModel().select(tab);
+        consoleController.initData();
+        consoleController.initView();
         return tab;
     }
-
 
 }
