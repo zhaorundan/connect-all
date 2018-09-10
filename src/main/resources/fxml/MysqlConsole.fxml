@@ -1,33 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<AnchorPane prefHeight="585.0" prefWidth="695.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jordan.app.connect.controller.MysqlConsoleController">
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="721.0" prefWidth="1029.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jordan.app.connect.controller.MysqlConsoleController">
     <children>
         <SplitPane dividerPositions="0.27638190954773867" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
-                <AnchorPane maxWidth="240.0">
+                <AnchorPane prefHeight="719.0" prefWidth="188.0">
                     <children>
                         <VBox layoutX="8.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <children>
-                                <ComboBox fx:id="databaseList" maxWidth="240.0" />
-                                <TextField fx:id="searchTable" maxWidth="240.0" />
-                                <ListView fx:id="tableList" />
+                                <ComboBox fx:id="databaseList" maxWidth="240.0" onAction="#buildDataBaseList" />
+                                <TextField fx:id="searchTable" maxWidth="240.0" onAction="#searchTableEvent" />
+                                <ListView fx:id="tableList" onMouseClicked="#buildTableView" prefHeight="657.0" prefWidth="200.0" />
                             </children>
                         </VBox>
                     </children>
                 </AnchorPane>
-            <BorderPane prefHeight="200.0" prefWidth="200.0">
+            <BorderPane>
                <top>
                   <HBox prefHeight="24.0" BorderPane.alignment="CENTER">
                      <children>
-                        <Button mnemonicParsing="false" text="Content" fx:id="contentButton">
+                        <Button fx:id="contentButton" mnemonicParsing="false" text="Content">
                            <HBox.margin>
                               <Insets bottom="1.0" left="5.0" right="10.0" top="2.0" />
                            </HBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" text="Query" fx:id="queryButton">
+                        <Button fx:id="queryButton" mnemonicParsing="false" text="Query">
                            <HBox.margin>
                               <Insets bottom="1.0" right="10.0" top="2.0" />
                            </HBox.margin>
@@ -40,7 +50,7 @@
                <center>
                   <Pane fx:id="mainPane">
                      <children>
-                        <TableView fx:id="tableView" maxHeight="1.7976931348623157E308" prefHeight="529.0" prefWidth="538.0"/>
+                        <TableView fx:id="tableView" editable="true" prefHeight="690.0" prefWidth="753.0" />
                      </children>
                   </Pane>
                </center>

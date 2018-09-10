@@ -73,7 +73,7 @@ public class MainController extends MainView {
             mainBorderPane.setCenter(mainTabpane);
         }
         mysqlTab.setOnClosed(event1 -> {
-            mainTabpane.getTabs().clear();
+
         });
         mainTabpane.getSelectionModel().select(mysqlTab);
     }

@@ -1,12 +1,11 @@
 package org.jordan.app.connect.connector;
 
-import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
 import org.jordan.app.connect.exception.JDBCException;
 import org.jordan.app.connect.model.JDBCParam;
-import org.springframework.stereotype.Component;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -44,7 +43,7 @@ public class Connections {
         if (StringUtils.isNotBlank(jdbcParam.getDatebase())) {
             url = url + "/" + jdbcParam.getDatebase();
         }
-        url = url + "?zeroDateTimeBehavior=convertToNull&amp;useUnicode=true&amp;characterEncoding=utf-8";
+        url = url + "?zeroDateTimeBehavior=convertToNull&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;autoReconnect=true&amp;failOverReadOnly=false";
         if (jdbcParam.isUseSSL()) {
             url = url + "&amp;useSSL=true";
         } else {
