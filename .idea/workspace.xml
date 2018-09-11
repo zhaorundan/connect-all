@@ -2,15 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b503f327-5822-4fd5-aed9-aec208b5abd4" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml/RedisTabpane.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/connector/Connections.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/connector/Connections.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/controller/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/controller/MysqlConsoleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/controller/MysqlConsoleController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/MysqlConsole.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/MysqlConsole.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/logback.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/logback.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fxml/MysqlConsole.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fxml/MysqlConsole.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/logback.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/logback.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../xJavaFxTool/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../xJavaFxTool/pom.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
@@ -304,7 +295,7 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="y" value="23" />
     <option name="width" value="1680" />
     <option name="height" value="1027" />
@@ -627,7 +618,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1536585020158" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1536629685456" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/pom.xml" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode.XML" />
@@ -732,16 +723,15 @@
       <workItem from="1536188827765" duration="3553000" />
       <workItem from="1536249527387" duration="6479000" />
       <workItem from="1536285497823" duration="4711000" />
-      <workItem from="1536573016547" duration="9331000" />
+      <workItem from="1536573016547" duration="9479000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="57835000" />
+    <option name="totallyTimeSpent" value="57983000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="1027" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Web" side_tool="true" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25274727" />
