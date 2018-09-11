@@ -11,12 +11,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
+import javafx.scene.control.cell.TextFieldListCell;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.util.Callback;
+import javafx.util.StringConverter;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -58,7 +58,7 @@ public class MysqlConsoleController extends MysqlConsoleView {
     public void initView() throws Exception {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/MysqlQuery.fxml"));
-        AnchorPane vBox = fxmlLoader.load();
+        VBox vBox = fxmlLoader.load();
 
         mainPane.getChildren().add(vBox);
         vBox.setVisible(false);
@@ -94,19 +94,35 @@ public class MysqlConsoleController extends MysqlConsoleView {
     }
 
     private void initTableListEvent() {
-        ContextMenu menu = new ContextMenu();
-        MenuItem copy = new MenuItem("Copy");
+//        ContextMenu menu = new ContextMenu();
+//        MenuItem copy = new MenuItem("Copy");
+//
+//        menu.getItems().addAll(copy);
+//        tableList.setContextMenu(menu);
+//
+//        copy.setOnAction(  event ->{
+//            Label label = tableList.getSelectionModel().getSelectedItem();
+//            final ClipboardContent clipboardContent = new ClipboardContent();
+//            clipboardContent.putString(label.getText());
+//            // set clipboard content
+//            Clipboard.getSystemClipboard().setContent(clipboardContent);
+//        });
+        tableList.setCellFactory(lv -> {
+            TextFieldListCell<Label> cell = new TextFieldListCell<>();
+            cell.setConverter(new StringConverter<Label>(){
+                @Override
+                public String toString(Label object) {
+                    return object.getText();
+                }
 
-        menu.getItems().addAll(copy);
-        tableList.setContextMenu(menu);
-
-        copy.setOnAction(  event ->{
-            Label label = tableList.getSelectionModel().getSelectedItem();
-            final ClipboardContent clipboardContent = new ClipboardContent();
-            clipboardContent.putString(label.getText());
-            // set clipboard content
-            Clipboard.getSystemClipboard().setContent(clipboardContent);
+                @Override
+                public Label fromString(String string) {
+                    return new Label(string);
+                }
+            });
+            return cell ;
         });
+
     }
 
     private void initTableViewEvent() {

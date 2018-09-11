@@ -1,27 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.AnchorPane?>
-<AnchorPane  xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jordan.app.connect.controller.MysqlQueryController" >
-    <children>
-        <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="611.0"
-              prefWidth="522.0" fx:id="queryArea">
-            <children>
-                <TextArea minHeight="-Infinity" minWidth="-Infinity" prefHeight="262.0" fx:id="queryText"/>
-                <Pane minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="32.0">
-                    <children>
-                        <Button mnemonicParsing="false" text="Button" fx:id="runQuery"/>
-                    </children>
-                </Pane>
-                <TableView prefHeight="611.0" prefWidth="522.0" fx:id="queryResult">
 
-                </TableView>
+<VBox fx:id="queryArea" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jordan.app.connect.controller.MysqlQueryController">
+    <children>
+        <TextArea fx:id="queryText" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" />
+        <Pane minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="32.0">
+            <children>
+                <Button fx:id="runQuery" mnemonicParsing="false" text="Button" />
             </children>
-        </VBox>
+        </Pane>
+        <TableView fx:id="queryResult">
+
+        </TableView>
     </children>
-</AnchorPane>
+</VBox>

@@ -278,7 +278,7 @@ public class MysqlTabpaneController extends MysqlTabpaneView {
         });
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/MysqlConsole.fxml"));
-        AnchorPane anchorPane = fxmlLoader.load();
+        SplitPane anchorPane = fxmlLoader.load();
         MysqlConsoleController consoleController = fxmlLoader.getController();
         consoleController.setJdbcId(jdbcId);
 

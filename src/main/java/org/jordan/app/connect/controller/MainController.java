@@ -39,23 +39,32 @@ public class MainController extends MainView {
 
         });
         addRedis.setOnAction(event -> {
-            addRedisTab(event);
+            try {
+                addRedisTab(event);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
     }
 
-    private void addRedisTab(ActionEvent event) {
+    private void addRedisTab(ActionEvent event) throws Exception{
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/RedisTabpane.fxml"));
+        AnchorPane anchorPane = fxmlLoader.load();
+        RedisTabpaneController redisTabpaneController = fxmlLoader.getController();
         Tab redisTab = new Tab();
         redisTab.setId("redis");
-        redisTab.setText("redis");
+        redisTab.setText("Redis");
         redisTab.setClosable(true);
+        redisTab.setContent(anchorPane);
         mainTabpane.getTabs().add(redisTab);
-        redisTab.setOnClosed(event1 -> {
-            mainTabpane.getTabs().clear();
-        });
         if (mainBorderPane.getCenter() == null) {
             mainBorderPane.setCenter(mainTabpane);
         }
+        redisTab.setOnClosed(event1 -> {
+
+        });
+        mainTabpane.getSelectionModel().select(redisTab);
     }
 
 
@@ -83,7 +92,4 @@ public class MainController extends MainView {
 
     }
 
-    public void setMainBorderPane(BorderPane mainBorderPane) {
-        this.mainBorderPane = mainBorderPane;
-    }
 }
