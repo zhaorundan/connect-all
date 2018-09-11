@@ -2,13 +2,10 @@ package org.jordan.app.connect.service;
 
 
 import com.google.common.collect.Lists;
-import lombok.Synchronized;
 import org.jordan.app.connect.connector.ConnectionConfigs;
 import org.jordan.app.connect.connector.Connections;
-import org.jordan.app.connect.model.JDBCParam;
-import org.springframework.stereotype.Service;
+import org.jordan.app.connect.model.ConfigParam;
 
-import javax.annotation.Resource;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
@@ -22,7 +19,7 @@ import java.util.List;
  */
 public class MysqlServiceImpl {
 
-    public boolean testConnection(JDBCParam jdbcParam) throws Exception {
+    public boolean testConnection(ConfigParam jdbcParam) throws Exception {
         Connection conn = Connections.getConnection(jdbcParam);
         ResultSet rs = conn.createStatement().executeQuery("select 1");
         if (rs.next()) {
@@ -32,7 +29,7 @@ public class MysqlServiceImpl {
     }
 
     public List<String> listDatabases(String jdbcId) {
-        Connection connection = Connections.getConnection(ConnectionConfigs.mysqlConfigs.get(jdbcId));
+        Connection connection = Connections.getConnection(ConnectionConfigs.configs.get(jdbcId));
         List<String> databases = Lists.newArrayList();
         try {
             ResultSet resultSet = connection.getMetaData().getCatalogs();

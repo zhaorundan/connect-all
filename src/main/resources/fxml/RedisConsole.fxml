@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<SplitPane dividerPositions="0.42105263157894735" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0"
+           prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+           AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="org.jordan.app.connect.controller.RedisConsoleController">
+    <items>
+        <AnchorPane prefHeight="730.0" prefWidth="358.0">
+            <children>
+                <VBox>
+                    <children>
+                        <HBox>
+                            <children>
+                                <ComboBox prefHeight="28.0" prefWidth="249.0"/>
+                                <TextField editable="false" prefHeight="26.0" prefWidth="83.0" text="Keys:"/>
+                            </children>
+                        </HBox>
+                        <HBox prefHeight="33.0" prefWidth="332.0">
+                            <children>
+                                <TextField/>
+                                <Button mnemonicParsing="false" text="搜索"/>
+                                <CheckBox mnemonicParsing="false" text="精确搜索"/>
+                            </children>
+                        </HBox>
+                        <ToolBar prefHeight="28.0" prefWidth="332.0">
+                            <items>
+                                <Button mnemonicParsing="false" prefWidth="10.0" text="创建"/>
+                                <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="42.0" text="删除"/>
+                                <Label alignment="CENTER_RIGHT" text="注：最多显示3000条左右" textAlignment="RIGHT"/>
+                            </items>
+                        </ToolBar>
+                        <TableView prefHeight="457.0" prefWidth="332.0" />
+                        <Pagination prefHeight="199.0" prefWidth="332.0"/>
+                    </children>
+                </VBox>
+            </children>
+        </AnchorPane>
+        <TabPane prefHeight="765.0" prefWidth="573.0" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab text="Untitled Tab 1">
+                    <content>
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                            <children>
+                                <HBox prefHeight="37.0" prefWidth="458.0">
+                                    <children>
+                                        <Label text="键名"/>
+                                        <TextField editable="false"/>
+                                        <Label text="SET"/>
+                                        <Label text="TTL" textAlignment="CENTER"/>
+                                        <TextField prefHeight="26.0" prefWidth="76.0"/><Label text="(s)"/>
+                                        <Button mnemonicParsing="false" text="修改TTL"/>
+                                    </children>
+                                </HBox>
+                                <HBox prefHeight="43.0" prefWidth="458.0">
+                                    <children>
+                                        <Button mnemonicParsing="false" text="刷新"/>
+                                        <Button mnemonicParsing="false" text="新增"/>
+                                        <Button mnemonicParsing="false" text="删除"/>
+                                        <Button mnemonicParsing="false" text="提交更改"/>
+                                        <TextField/>
+                                        <Button mnemonicParsing="false" text="搜索"/>
+                                    </children>
+                                </HBox>
+                                <TableView prefHeight="754.0" prefWidth="458.0" />
+                                <Pagination prefHeight="200.0" prefWidth="200.0"/>
+                            </children>
+                        </VBox>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </items>
+</SplitPane>

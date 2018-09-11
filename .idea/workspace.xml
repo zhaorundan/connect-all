@@ -2,21 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b503f327-5822-4fd5-aed9-aec208b5abd4" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/controller/RedisTabpaneController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/view/RedisTabpaneView.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/fxml/RedisTabpane.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/controller/RedisConsoleController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/service/ConfigServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/service/RedisServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/view/RedisConsoleView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml/RedisConsole.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/controller/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/controller/MysqlConsoleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/controller/MysqlConsoleController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/connector/ConnectionConfigs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/connector/ConnectionConfigs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/connector/Connections.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/connector/Connections.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/controller/MysqlTabpaneController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/controller/MysqlTabpaneController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/MysqlConsole.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/MysqlConsole.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/MysqlQuery.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/MysqlQuery.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/MysqlTabpane.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/MysqlTabpane.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/RedisTabpane.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/RedisTabpane.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/controller/RedisTabpaneController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/controller/RedisTabpaneController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/model/JDBCParam.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/model/ConfigParam.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/service/MysqlServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/service/MysqlServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/view/RedisTabpaneView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/view/RedisTabpaneView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/fxml/MysqlConsole.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fxml/MysqlConsole.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fxml/MysqlQuery.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fxml/MysqlQuery.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fxml/MysqlTabpane.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fxml/MysqlTabpane.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../xJavaFxTool/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../xJavaFxTool/pom.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
@@ -32,7 +31,7 @@
     <session id="-1480378808">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="5" />
+          <entry key="project.closed" value="6" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.1" value="2" />
           <entry key="project.open.time.2" value="1" />
@@ -44,24 +43,25 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="1" />
-          <entry key="fxml" value="114" />
-          <entry key="java" value="2706" />
+          <entry key="fxml" value="221" />
+          <entry key="java" value="3255" />
           <entry key="xml" value="8" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="2706" />
+          <entry key="JAVA" value="3255" />
           <entry key="PLAIN_TEXT" value="1" />
-          <entry key="XML" value="122" />
+          <entry key="XML" value="229" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="class" value="1" />
-          <entry key="fxml" value="16" />
+          <entry key="css" value="1" />
+          <entry key="fxml" value="18" />
           <entry key="gitignore" value="1" />
-          <entry key="java" value="39" />
+          <entry key="java" value="54" />
           <entry key="xml" value="2" />
           <entry key="yaml" value="1" />
         </counts>
@@ -69,9 +69,10 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CLASS" value="1" />
-          <entry key="JAVA" value="39" />
+          <entry key="CSS" value="1" />
+          <entry key="JAVA" value="54" />
           <entry key="PLAIN_TEXT" value="1" />
-          <entry key="XML" value="18" />
+          <entry key="XML" value="20" />
           <entry key="YAML" value="1" />
         </counts>
       </usages-collector>
@@ -80,110 +81,106 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/jordan/app/connect/controller/MysqlConsoleController.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/jordan/app/connect/connector/Connector.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="353">
-              <caret line="80" column="5" lean-forward="true" selection-start-line="80" selection-start-column="5" selection-end-line="80" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#3700#3701#0" expanded="true" />
-                <element signature="e#3751#3752#0" expanded="true" />
-                <element signature="e#3835#3836#0" expanded="true" />
-                <element signature="e#3886#3887#0" expanded="true" />
-                <element signature="e#4650#4651#0" expanded="true" />
-                <element signature="e#4730#4731#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="136">
+              <caret line="8" column="16" lean-forward="true" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/RedisTabpane.fxml">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/jordan/app/connect/service/MysqlServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
-            </state>
-          </provider>
-          <provider editor-type-id="JavaFX-Scene-Builder" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/jordan/app/connect/view/RedisTabpaneView.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" selection-start-line="6" selection-end-line="6" />
+            <state relative-caret-position="255">
+              <caret line="24" column="24" lean-forward="true" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="24" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/jordan/app/connect/controller/RedisTabpaneController.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/jordan/app/connect/service/RedisServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="197">
-              <caret line="18" column="23" selection-start-line="18" selection-start-column="23" selection-end-line="18" selection-end-column="23" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="68">
+              <caret line="4" selection-start-line="4" selection-end-line="4" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/MysqlTabpane.fxml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="19" column="82" selection-start-line="19" selection-start-column="82" selection-end-line="19" selection-end-column="82" />
-            </state>
-          </provider>
-          <provider editor-type-id="JavaFX-Scene-Builder" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/MysqlQuery.fxml">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/jordan/app/connect/controller/RedisConsoleController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="221">
-              <caret line="13" column="22" lean-forward="true" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
-            </state>
-          </provider>
-          <provider editor-type-id="JavaFX-Scene-Builder" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/Main.fxml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="274">
-              <caret line="17" column="27" lean-forward="true" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
-            </state>
-          </provider>
-          <provider editor-type-id="JavaFX-Scene-Builder" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/jordan/app/connect/connector/ConnectionConfigs.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="9" column="1" lean-forward="true" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/jordan/app/connect/view/MysqlConsoleView.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="17" column="22" selection-start-line="17" selection-start-column="22" selection-end-line="17" selection-end-column="22" />
+              <caret line="13" selection-start-line="13" selection-end-line="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/MysqlConsole.fxml">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/jordan/app/connect/service/ConfigServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="39" lean-forward="true" selection-start-line="16" selection-start-column="39" selection-end-line="16" selection-end-column="39" />
+            <state relative-caret-position="255">
+              <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
-          <provider editor-type-id="JavaFX-Scene-Builder" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/jordan/app/connect/controller/MysqlTabpaneController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="259">
+              <caret line="194" column="24" lean-forward="true" selection-start-line="194" selection-start-column="24" selection-end-line="194" selection-end-column="24" />
+              <folding>
+                <element signature="e#4936#4937#0" expanded="true" />
+                <element signature="e#4970#4971#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/jordan/app/connect/connector/ConnectionConfigs.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/jordan/app/connect/view/RedisConsoleView.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="4" column="22" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/jordan/app/connect/view/RedisTabpaneView.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="19" column="9" selection-start-line="19" selection-start-column="9" selection-end-line="19" selection-end-column="9" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/jordan/app/connect/model/ConfigParam.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+            </state>
+          </provider>
         </entry>
       </file>
     </leaf>
@@ -197,7 +194,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>setOnMouseClicked</find>
       <find>mysqlconsole</find>
       <find>queryArea</find>
       <find>queryText</find>
@@ -220,13 +216,14 @@
       <find>buildDataEvent</find>
       <find>tableView</find>
       <find>fx:id</find>
-      <find>addConfig</find>
       <find>mysqlListview</find>
       <find>listview</find>
-      <find>mysql</find>
       <find>setTabview</find>
       <find>tableData</find>
       <find>tableList</find>
+      <find>mysql</find>
+      <find>addConfig</find>
+      <find>configId</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -261,7 +258,6 @@
         <option value="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/MainController.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/service/MysqlConnector.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/connector/ConnectionPool.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/connector/ConnectionConfigs.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/MainApp.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/fxml/Main.fxml" />
@@ -273,20 +269,28 @@
         <option value="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/view/MysqlQueryVIew.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/fxml/MysqlConsole.fxml" />
         <option value="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/view/MysqlQueryView.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/controller/MysqlTabpaneController.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/fxml/MysqlQuery.fxml" />
         <option value="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/controller/MysqlQueryController.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/view/MainView.java" />
         <option value="$PROJECT_DIR$/src/main/resources/logback.xml" />
         <option value="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/connector/Connections.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/view/RedisTabpaneView.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/controller/MainController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/fxml/MysqlTabpane.fxml" />
-        <option value="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/controller/RedisTabpaneController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/fxml/RedisTabpane.fxml" />
         <option value="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/view/MysqlConsoleView.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/controller/MysqlConsoleController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/fxml/MysqlConsole.fxml" />
+        <option value="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/view/RedisConsoleView.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/fxml/RedisConsole.fxml" />
+        <option value="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/controller/RedisConsoleController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/view/RedisTabpaneView.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/controller/RedisTabpaneController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/service/RedisServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/model/JDBCParam.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/connector/ConnectionConfigs.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/model/ConfigParam.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/service/ConfigServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/controller/MysqlTabpaneController.java" />
       </list>
     </option>
   </component>
@@ -402,6 +406,15 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="connect" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="connect-all" type="b2602c69:ProjectViewProjectNode" />
+              <item name="connect-all" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="connect" type="462c0819:PsiDirectoryNode" />
               <item name="view" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -410,6 +423,14 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="connect-all" type="b2602c69:ProjectViewProjectNode" />
+              <item name="connect-all" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="connect-all" type="b2602c69:ProjectViewProjectNode" />
@@ -651,17 +672,17 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1536658225456" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1536663843966" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/pom.xml" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode.XML" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
+    <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources/fxml" />
       <recent name="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/fxml" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
+    <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources/fxml" />
       <recent name="$PROJECT_DIR$/src/main/java/org/jordan/app/connect/fxml" />
     </key>
@@ -757,12 +778,12 @@
       <workItem from="1536249527387" duration="6479000" />
       <workItem from="1536285497823" duration="4711000" />
       <workItem from="1536573016547" duration="9479000" />
-      <workItem from="1536652757902" duration="4567000" />
+      <workItem from="1536652757902" duration="9071000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="62550000" />
+    <option name="totallyTimeSpent" value="67054000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="1027" extended-state="6" />
@@ -778,9 +799,9 @@
       <window_info id="Capture Tool" order="7" />
       <window_info id="Web" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32941177" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32908162" />
-      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.3989305" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3989305" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -892,46 +913,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_161.jdk/Contents/Home/jre/lib/rt.jar!/com/apple/eawt/_AppEventHandler.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="211" selection-start-line="211" selection-end-line="211" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/jordan/app/connect/fxml/MysqlQuery.fxml" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/jordan/app/connect/fxml/MysqlTabpane.fxml" />
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_161.jdk/Contents/Home/javafx-src.zip!/javafx/application/Application.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="222" column="26" selection-start-line="222" selection-start-column="26" selection-end-line="222" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_161.jdk/Contents/Home/javafx-src.zip!/javafx/fxml/Initializable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="40" column="17" selection-start-line="40" selection-start-column="17" selection-end-line="40" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../xJavaFxTool/src/main/java/com/xwintop/xJavaFxTool/services/IndexService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../xJavaFxTool/src/main/java/com/xwintop/xJavaFxTool/services/javaFxTools/package-info.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../xJavaFxTool/src/main/java/com/xwintop/xJavaFxTool/services/javaFxTools/JavaFxXmlToObjectCodeService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1160">
-          <caret line="27" column="16" lean-forward="true" selection-start-line="27" selection-start-column="16" selection-end-line="27" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../xJavaFxTool/src/main/java/com/xwintop/xJavaFxTool/controller/debugTools/ActiveMqToolController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
@@ -1120,31 +1101,6 @@
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/jordan/app/connect/controller/MysqlQueryController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="918">
-          <caret line="80" column="19" selection-start-line="80" selection-start-column="19" selection-end-line="80" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/jordan/app/connect/view/MysqlTabpaneView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="11" column="63" selection-start-line="11" selection-start-column="39" selection-end-line="11" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/jordan/app/connect/controller/MysqlTabpaneController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="82" column="21" selection-start-line="82" selection-start-column="8" selection-end-line="82" selection-end-column="21" />
-          <folding>
-            <element signature="e#4936#4937#0" expanded="true" />
-            <element signature="e#4970#4971#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/jordan/app/connect/controller/MainController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="396">
@@ -1165,28 +1121,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/jordan/app/connect/connector/Connector.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/jordan/app/connect/connector/ConnectionConfigs.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="9" column="1" lean-forward="true" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/MysqlTabpane.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="82" selection-start-line="19" selection-start-column="82" selection-end-line="19" selection-end-column="82" />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/MysqlQuery.fxml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
@@ -1203,41 +1137,24 @@
       </provider>
       <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/jordan/app/connect/view/RedisTabpaneView.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/MysqlConsole.fxml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" selection-start-line="6" selection-end-line="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/jordan/app/connect/controller/RedisTabpaneController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="18" column="23" selection-start-line="18" selection-start-column="23" selection-end-line="18" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/RedisTabpane.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+        <state relative-caret-position="238">
+          <caret line="17" column="21" lean-forward="true" selection-start-line="17" selection-start-column="21" selection-end-line="17" selection-end-column="21" />
         </state>
       </provider>
       <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/jordan/app/connect/view/MysqlConsoleView.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/jordan/app/connect/controller/MysqlQueryController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="17" column="22" selection-start-line="17" selection-start-column="22" selection-end-line="17" selection-end-column="22" />
+        <state relative-caret-position="503">
+          <caret line="80" column="19" selection-start-line="80" selection-start-column="19" selection-end-line="80" selection-end-column="19" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/jordan/app/connect/controller/MysqlConsoleController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="353">
+        <state relative-caret-position="1114">
           <caret line="80" column="5" lean-forward="true" selection-start-line="80" selection-start-column="5" selection-end-line="80" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1251,13 +1168,145 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/MysqlConsole.fxml">
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/jordan/app/connect/view/MysqlConsoleView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="39" lean-forward="true" selection-start-line="16" selection-start-column="39" selection-end-line="16" selection-end-column="39" />
+        <state relative-caret-position="45">
+          <caret line="17" column="63" selection-start-line="17" selection-start-column="39" selection-end-line="17" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/RedisConsole.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="235">
+          <caret line="62" column="16" selection-start-line="62" selection-start-column="16" selection-end-line="62" selection-end-column="16" />
         </state>
       </provider>
       <provider editor-type-id="JavaFX-Scene-Builder" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/RedisTabpane.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="235">
+          <caret line="67" column="63" lean-forward="true" selection-start-line="67" selection-start-column="63" selection-end-line="67" selection-end-column="63" />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/jordan/app/connect/view/MysqlTabpaneView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="11" column="63" selection-start-line="11" selection-start-column="39" selection-end-line="11" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/MysqlTabpane.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="74" column="55" lean-forward="true" selection-start-line="74" selection-start-column="55" selection-end-line="74" selection-end-column="55" />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/jordan/app/connect/controller/RedisTabpaneController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="335">
+          <caret line="23" selection-start-line="23" selection-end-line="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#374#375#0" expanded="true" />
+            <element signature="e#403#404#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/jordan/app/connect/connector/Connector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="16" lean-forward="true" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/jordan/app/connect/controller/RedisConsoleController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" selection-start-line="13" selection-end-line="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/jordan/app/connect/service/MysqlServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="24" column="24" lean-forward="true" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/jordan/app/connect/service/RedisServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/jordan/app/connect/connector/ConnectionConfigs.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/jordan/app/connect/view/RedisConsoleView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="22" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/jordan/app/connect/view/RedisTabpaneView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="9" selection-start-line="19" selection-start-column="9" selection-end-line="19" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/jordan/app/connect/model/ConfigParam.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/jordan/app/connect/controller/MysqlTabpaneController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="259">
+          <caret line="194" column="24" lean-forward="true" selection-start-line="194" selection-start-column="24" selection-end-line="194" selection-end-column="24" />
+          <folding>
+            <element signature="e#4936#4937#0" expanded="true" />
+            <element signature="e#4970#4971#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/jordan/app/connect/service/ConfigServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
     </entry>
   </component>
   <component name="masterDetails">

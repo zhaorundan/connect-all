@@ -2,7 +2,7 @@ package org.jordan.app.connect.connector;
 
 import org.apache.commons.lang3.StringUtils;
 import org.jordan.app.connect.exception.JDBCException;
-import org.jordan.app.connect.model.JDBCParam;
+import org.jordan.app.connect.model.ConfigParam;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -17,7 +17,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class Connections {
     private static Map<String, Connection> pool = new ConcurrentHashMap<>();
 
-    public static Connection getConnection(JDBCParam jdbcParam) {
+    public static Connection getConnection(ConfigParam jdbcParam) {
 
         Connection connection = pool.get(jdbcParam.getId());
         if (connection == null) {
@@ -32,12 +32,12 @@ public class Connections {
     }
 
     public static Connection getConnection(String jdbcId) {
-        JDBCParam jdbcParam = ConnectionConfigs.mysqlConfigs.get(jdbcId);
+        ConfigParam jdbcParam = ConnectionConfigs.configs.get(jdbcId);
         return getConnection(jdbcParam);
     }
 
 
-    private  static Connection createConnection(JDBCParam jdbcParam)  {
+    private  static Connection createConnection(ConfigParam jdbcParam)  {
         Connection conn = null ;
         String url = "jdbc:mysql://"+jdbcParam.getHost()+":"+jdbcParam.getPort();
         if (StringUtils.isNotBlank(jdbcParam.getDatebase())) {

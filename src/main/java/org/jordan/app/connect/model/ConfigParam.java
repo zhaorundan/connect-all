@@ -19,10 +19,11 @@ import java.util.Date;
 @ToString
 @XmlRootElement
 @EqualsAndHashCode
-public class JDBCParam implements Serializable {
+public class ConfigParam implements Serializable {
 
     private static final long serialVersionUID = -4458074170372300213L;
     private String id;
+    private ConfigType type;
     private String name;
     private String host;
     private String userName;
@@ -30,6 +31,11 @@ public class JDBCParam implements Serializable {
     private String datebase;
     private Integer port;
     private Date createTime;
+    private Date updateTime;
     private boolean useSSL;
+
+    static enum ConfigType{
+        MYSQL,REDIS,MONGON
+    }
 
 }

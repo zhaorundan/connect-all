@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Pagination?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<SplitPane dividerPositions="0.42105263157894735" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0"
+           prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+           AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="org.jordan.app.connect.controller.RedisConsoleController">
+    <items>
+        <AnchorPane prefHeight="730.0" prefWidth="358.0">
+            <children>
+                <VBox>
+                    <children>
+                        <HBox>
+                            <children>
+                                <ComboBox prefHeight="28.0" prefWidth="249.0"/>
+                                <TextField editable="false" prefHeight="26.0" prefWidth="83.0" text="Keys:"/>
+                            </children>
+                        </HBox>
+                        <HBox prefHeight="33.0" prefWidth="332.0">
+                            <children>
+                                <TextField/>
+                                <Button mnemonicParsing="false" text="搜索"/>
+                                <CheckBox mnemonicParsing="false" text="精确搜索"/>
+                            </children>
+                        </HBox>
+                        <ToolBar prefHeight="28.0" prefWidth="332.0">
+                            <items>
+                                <Button mnemonicParsing="false" prefWidth="10.0" text="创建"/>
+                                <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="42.0" text="删除"/>
+                                <Label alignment="CENTER_RIGHT" text="注：最多显示3000条左右" textAlignment="RIGHT"/>
+                            </items>
+                        </ToolBar>
+                        <TableView prefHeight="457.0" prefWidth="332.0" />
+                        <Pagination prefHeight="199.0" prefWidth="332.0"/>
+                    </children>
+                </VBox>
+            </children>
+        </AnchorPane>
+        <TabPane prefHeight="765.0" prefWidth="573.0" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab text="Untitled Tab 1">
+                    <content>
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                            <children>
+                                <HBox prefHeight="37.0" prefWidth="458.0">
+                                    <children>
+                                        <Label text="sfsdfsdfs"/>
+                                        <TextField/>
+                                        <Label text="Label"/>
+                                        <Label text="Label" textAlignment="CENTER"/>
+                                        <TextField prefHeight="26.0" prefWidth="76.0"/>
+                                        <Button mnemonicParsing="false" text="Button"/>
+                                    </children>
+                                </HBox>
+                                <HBox prefHeight="43.0" prefWidth="458.0">
+                                    <children>
+                                        <Button mnemonicParsing="false" text="Button"/>
+                                        <Button mnemonicParsing="false" text="Button"/>
+                                        <Button mnemonicParsing="false" text="Button"/>
+                                        <Button mnemonicParsing="false" text="Button"/>
+                                        <TextField/>
+                                        <Button mnemonicParsing="false" text="Button"/>
+                                    </children>
+                                </HBox>
+                                <TableView prefHeight="754.0" prefWidth="458.0">
+                                    <columns>
+                                        <TableColumn prefWidth="75.0" text="C1"/>
+                                        <TableColumn prefWidth="75.0" text="C2"/>
+                                    </columns>
+                                </TableView>
+                                <Pagination prefHeight="200.0" prefWidth="200.0"/>
+                            </children>
+                        </VBox>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </items>
+</SplitPane>

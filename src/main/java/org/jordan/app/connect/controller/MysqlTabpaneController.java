@@ -6,12 +6,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jordan.app.connect.connector.ConnectionConfigs;
-import org.jordan.app.connect.model.JDBCParam;
+import org.jordan.app.connect.model.ConfigParam;
+import org.jordan.app.connect.service.ConfigServiceImpl;
 import org.jordan.app.connect.service.MysqlServiceImpl;
 import org.jordan.app.connect.utils.MyFileUtils;
 import org.jordan.app.connect.utils.ShortUUID;
@@ -104,9 +104,9 @@ public class MysqlTabpaneController extends MysqlTabpaneView {
         File configFile = new File(path + File.separator + "config" + File.separator + "mysql" + File.separator + id + ".xml");
         if (configFile.exists() && configFile.isFile()) {
             configFile.delete();
-            ConnectionConfigs.mysqlConfigs.remove(id);
+            ConnectionConfigs.configs.remove(id);
         }
-        if (ConnectionConfigs.mysqlConfigs.isEmpty()) {
+        if (ConnectionConfigs.configs.isEmpty()) {
             resetConfig(false);
         }
 
@@ -116,7 +116,7 @@ public class MysqlTabpaneController extends MysqlTabpaneView {
 
         try {
             Label label = mysqlListview.getSelectionModel().getSelectedItem();
-            mysqlService.testConnection(ConnectionConfigs.mysqlConfigs.get(label.getId()));
+            mysqlService.testConnection(ConnectionConfigs.configs.get(label.getId()));
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("success");
             alert.setHeaderText(null);
@@ -145,11 +145,11 @@ public class MysqlTabpaneController extends MysqlTabpaneView {
             }
             for (File file : configFile.listFiles()) {
                 Label label = new Label();
-                JDBCParam jdbcParam = XmlUtils.xmlToBean(FileUtils.readFileToString(file, "utf-8"),JDBCParam.class);
+                ConfigParam jdbcParam = XmlUtils.xmlToBean(FileUtils.readFileToString(file, "utf-8"), ConfigParam.class);
                 label.setText(jdbcParam.getName());
                 label.setId(String.valueOf(jdbcParam.getId()));
                 configs.add(label);
-                ConnectionConfigs.mysqlConfigs.put(jdbcParam.getId(), jdbcParam);
+                ConnectionConfigs.configs.put(jdbcParam.getId(), jdbcParam);
             }
             mysqlListview.getItems().addAll(configs);
         }
@@ -162,14 +162,38 @@ public class MysqlTabpaneController extends MysqlTabpaneView {
         resetConfig(false);
     }
 
+    private ConfigServiceImpl configService = new ConfigServiceImpl();
     /**
      * 保存配置按钮
      */
     public void saveConfig() {
-        JDBCParam jdbcParam = getJDBCParam();
-        if (StringUtils.isBlank(jdbcParam.getId())) {
-            jdbcParam.setId(ShortUUID.generateShortUuid());
-            persistenConfig(jdbcParam);
+//        ConfigParam jdbcParam = getJDBCParam();
+//        if (StringUtils.isBlank(jdbcParam.getId())) {
+//            jdbcParam.setId(ShortUUID.generateShortUuid());
+//            persistenConfig(jdbcParam);
+//            Label label = new Label();
+//            label.setText(jdbcParam.getName());
+//            label.setId(jdbcParam.getId());
+//            mysqlListview.getItems().add(label);
+//        } else {
+//            Label label = mysqlListview.getSelectionModel().getSelectedItem();
+//            if (label != null) {
+//                label.setText(jdbcParam.getName());
+//            }
+//            persistenConfig(jdbcParam);
+//        }
+//        configId.setText(jdbcParam.getId());
+//        ConnectionConfigs.configs.put(jdbcParam.getId(), jdbcParam);
+//        Iterator<Label> iterator = mysqlListview.getItems().iterator();
+//        while (iterator.hasNext()) {
+//            Label label = iterator.next();
+//            if (label.getId().equalsIgnoreCase(jdbcParam.getId())) {
+//                mysqlListview.getSelectionModel().select(label);
+//            }
+//        }
+        ConfigParam jdbcParam = getJDBCParam();
+        configService.save(jdbcParam);
+        if (StringUtils.isBlank(configId.getText())) {
             Label label = new Label();
             label.setText(jdbcParam.getName());
             label.setId(jdbcParam.getId());
@@ -179,10 +203,8 @@ public class MysqlTabpaneController extends MysqlTabpaneView {
             if (label != null) {
                 label.setText(jdbcParam.getName());
             }
-            persistenConfig(jdbcParam);
         }
         configId.setText(jdbcParam.getId());
-        ConnectionConfigs.mysqlConfigs.put(jdbcParam.getId(), jdbcParam);
         Iterator<Label> iterator = mysqlListview.getItems().iterator();
         while (iterator.hasNext()) {
             Label label = iterator.next();
@@ -190,19 +212,21 @@ public class MysqlTabpaneController extends MysqlTabpaneView {
                 mysqlListview.getSelectionModel().select(label);
             }
         }
-    }
 
-    private void persistenConfig(JDBCParam jdbcParam) {
-        String path = MyFileUtils.getUserDir();
-        File configFile = new File(path + File.separator + "config" + File.separator + "mysql" + File.separator + jdbcParam.getId() + ".xml");
-        try {
-            String jdbcConfigXml = XmlUtils.beanToXml(jdbcParam);
-            FileUtils.writeStringToFile(configFile, jdbcConfigXml, "utf-8", false);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
     }
+
+//    private void persistenConfig(ConfigParam jdbcParam) {
+//        String path = MyFileUtils.getUserDir();
+//        File configFile = new File(path + File.separator + "config" + File.separator + "mysql" + File.separator + jdbcParam.getId() + ".xml");
+//        try {
+//            String jdbcConfigXml = XmlUtils.beanToXml(jdbcParam);
+//            FileUtils.writeStringToFile(configFile, jdbcConfigXml, "utf-8", false);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//    }
 
 
     public void resetConfig() {
@@ -235,7 +259,7 @@ public class MysqlTabpaneController extends MysqlTabpaneView {
             if (label == null) {
                 return;
             }
-            JDBCParam jdbcParam = ConnectionConfigs.mysqlConfigs.get(label.getId());
+            ConfigParam jdbcParam = ConnectionConfigs.configs.get(label.getId());
             if (jdbcParam == null) {
                 return;
             }
@@ -252,8 +276,8 @@ public class MysqlTabpaneController extends MysqlTabpaneView {
         }
 
     }
-    private JDBCParam getJDBCParam() {
-        JDBCParam jdbcParam = new JDBCParam();
+    private ConfigParam getJDBCParam() {
+        ConfigParam jdbcParam = new ConfigParam();
         jdbcParam.setName(connName.getText());
         jdbcParam.setDatebase(database.getText());
         jdbcParam.setHost(host.getText());
@@ -261,7 +285,6 @@ public class MysqlTabpaneController extends MysqlTabpaneView {
         jdbcParam.setPort(StringUtils.isBlank(port.getText()) ? 3306 : Integer.valueOf(port.getText()));
         jdbcParam.setUseSSL(isSSL.isSelected());
         jdbcParam.setUserName(userName.getText());
-        jdbcParam.setCreateTime(new Date());
         if (StringUtils.isNotBlank(configId.getText())) {
             jdbcParam.setId(configId.getText());
         }

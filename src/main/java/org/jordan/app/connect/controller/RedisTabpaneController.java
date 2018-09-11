@@ -17,7 +17,7 @@ public class RedisTabpaneController extends RedisTabpaneView {
     }
 
     public void addConfig() {
-
+        resetConfig();
     }
 
     public void connectTest() {
@@ -26,7 +26,24 @@ public class RedisTabpaneController extends RedisTabpaneView {
     public void saveConfig() {
 
     }
-    public void resetConfig() {
 
+
+    public void resetConfig() {
+        resetConfig(true);
+    }
+
+    /**
+     * 重置按钮
+     * @param exists
+     */
+    private void resetConfig(boolean exists) {
+        connName.setText("");
+        host.setText("");
+        password.setText("");
+        port.setText("");
+        isSSL.setSelected(false);
+        if (!exists) {
+            configId.setText("");
+        }
     }
 }
