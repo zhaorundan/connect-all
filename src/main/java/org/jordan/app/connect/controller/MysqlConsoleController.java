@@ -16,6 +16,7 @@ import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import lombok.Getter;
 import lombok.Setter;
@@ -58,7 +59,7 @@ public class MysqlConsoleController extends MysqlConsoleView {
     public void initView() throws Exception {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/MysqlQuery.fxml"));
-        AnchorPane vBox = fxmlLoader.load();
+        VBox vBox = fxmlLoader.load();
 
         mainPane.getChildren().add(vBox);
         vBox.setVisible(false);
