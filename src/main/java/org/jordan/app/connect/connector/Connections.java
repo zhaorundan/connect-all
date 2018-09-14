@@ -3,6 +3,7 @@ package org.jordan.app.connect.connector;
 import org.apache.commons.lang3.StringUtils;
 import org.jordan.app.connect.exception.JDBCException;
 import org.jordan.app.connect.model.ConfigParam;
+import org.jordan.app.connect.model.MysqlConfigs;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -32,7 +33,7 @@ public class Connections {
     }
 
     public static Connection getConnection(String jdbcId) {
-        ConfigParam jdbcParam = ConnectionConfigs.configs.get(jdbcId);
+        ConfigParam jdbcParam = MysqlConfigs.CONFIG.get(jdbcId);
         return getConnection(jdbcParam);
     }
 

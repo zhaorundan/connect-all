@@ -2,9 +2,9 @@ package org.jordan.app.connect.service;
 
 
 import com.google.common.collect.Lists;
-import org.jordan.app.connect.connector.ConnectionConfigs;
 import org.jordan.app.connect.connector.Connections;
 import org.jordan.app.connect.model.ConfigParam;
+import org.jordan.app.connect.model.MysqlConfigs;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
@@ -18,9 +18,25 @@ import java.util.List;
  * @date 2018/8/23下午10:50
  */
 public class MysqlServiceImpl {
+    private static MysqlServiceImpl mysqlService = new MysqlServiceImpl();
+    private MysqlServiceImpl(){}
+    public static MysqlServiceImpl getInstance() {
+        return mysqlService;
+    }
 
-    public boolean testConnection(ConfigParam jdbcParam) throws Exception {
-        Connection conn = Connections.getConnection(jdbcParam);
+    private MysqlConfigs mysqlConfigs = MysqlConfigs.getInstance();
+
+    public void saveConfig(ConfigParam configParam) {
+        mysqlConfigs.saveConfig(configParam);
+    }
+
+    public void delConfig(String configId) {
+        mysqlConfigs.delConfig(configId);
+    }
+
+    public boolean testConnection(String configId) throws Exception {
+
+        Connection conn = Connections.getConnection(MysqlConfigs.CONFIG.get(configId));
         ResultSet rs = conn.createStatement().executeQuery("select 1");
         if (rs.next()) {
             return true;
@@ -29,7 +45,7 @@ public class MysqlServiceImpl {
     }
 
     public List<String> listDatabases(String jdbcId) {
-        Connection connection = Connections.getConnection(ConnectionConfigs.configs.get(jdbcId));
+        Connection connection = Connections.getConnection(MysqlConfigs.CONFIG.get(jdbcId));
         List<String> databases = Lists.newArrayList();
         try {
             ResultSet resultSet = connection.getMetaData().getCatalogs();
@@ -94,6 +110,12 @@ public class MysqlServiceImpl {
         }
         return columns;
     }
+
+    public List<ConfigParam> initConfig() {
+        MysqlConfigs.getInstance().initConfig();
+        return MysqlConfigs.getInstance().getConfigs();
+    }
+
 
 
 }

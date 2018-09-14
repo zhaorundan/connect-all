@@ -49,7 +49,6 @@ public class MainApp extends Application {
 //        primaryStage.getIcons().add(new Image("/images/icon.jpg"));//图标
         primaryStage.setScene(scene);
         primaryStage.show();
-
         primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent event) {

@@ -17,7 +17,7 @@ import java.util.Date;
 @Setter
 @Getter
 @ToString
-@XmlRootElement
+//@XmlRootElement
 @EqualsAndHashCode
 public class ConfigParam implements Serializable {
 
@@ -34,7 +34,7 @@ public class ConfigParam implements Serializable {
     private Date updateTime;
     private boolean useSSL;
 
-    static enum ConfigType{
+    public static enum ConfigType{
         MYSQL,REDIS,MONGON
     }
 

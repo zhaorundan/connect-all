@@ -37,7 +37,6 @@ import java.util.ResourceBundle;
  */
 @Slf4j
 public class MysqlConsoleController extends MysqlConsoleView {
-    private MysqlServiceImpl mysqlService = new MysqlServiceImpl();
 
     @Getter
     @Setter
@@ -84,7 +83,7 @@ public class MysqlConsoleController extends MysqlConsoleView {
 
     public void initData() {
         //展示所有数据库
-        List<String> databases = mysqlService.listDatabases(jdbcId);
+        List<String> databases = MysqlServiceImpl.getInstance().listDatabases(jdbcId);
 
         for (String database : databases) {
             databaseList.getItems().add(database);
@@ -139,7 +138,7 @@ public class MysqlConsoleController extends MysqlConsoleView {
         try {
             tableList.getItems().clear();
             String database = getDatabase();
-            List<String> tables = mysqlService.listTablesOfDatabase(database, jdbcId);
+            List<String> tables = MysqlServiceImpl.getInstance().listTablesOfDatabase(database, jdbcId);
             tableData.clear();
             for (String table : tables) {
                 Label label = new Label();
