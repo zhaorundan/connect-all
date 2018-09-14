@@ -95,7 +95,7 @@ public class RedisTabpaneController extends RedisTabpaneView {
     }
 
     public void addConfig() {
-        resetConfig();
+        resetConfig(false);
     }
 
     public void connectTest() {
