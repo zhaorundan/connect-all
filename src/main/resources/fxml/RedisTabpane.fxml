@@ -32,9 +32,9 @@
                                                 <ListView fx:id="redisListview" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#clickview" prefHeight="409.0" prefWidth="181.0" VBox.vgrow="ALWAYS" />
                                                 <HBox prefHeight="30.0" prefWidth="100.0" VBox.vgrow="NEVER">
                                                     <children>
-                                                        <Button fx:id="redisCreate" mnemonicParsing="false" onAction="#addConfig" text="create" />
+                                                        <Button fx:id="redisCreate" mnemonicParsing="false" onAction="#addConfig" text="create" HBox.hgrow="ALWAYS"/>
                                                         <Button mnemonicParsing="false" text="Button" />
-                                                        <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="62.0" text="Button" />
+                                                        <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="62.0" text="Button" HBox.hgrow="ALWAYS"/>
                                                     </children>
                                                 </HBox>
                                             </children>

@@ -57,18 +57,20 @@ public class MysqlConfigs extends ConnectConfig implements Serializable{
     @Override
     public void initConfig() {
         File configFile = new File(MyFileUtils.getUserDir() + File.separator + "config" + File.separator + ConfigParam.ConfigType.MYSQL + ".xml");
-        try {
-            MysqlConfigs jdbcParam = XmlUtils.xmlToBean(FileUtils.readFileToString(configFile, "utf-8"), getClass());
-            if (jdbcParam != null) {
-                for (ConfigParam config : jdbcParam.getConfigs()) {
-                    CONFIG.put(config.getId(), config);
-                }
-                setConfigs(jdbcParam.getConfigs());
+        if (configFile.exists()) {
+            try {
+                MysqlConfigs jdbcParam = XmlUtils.xmlToBean(FileUtils.readFileToString(configFile, "utf-8"), getClass());
+                if (jdbcParam != null) {
+                    for (ConfigParam config : jdbcParam.getConfigs()) {
+                        CONFIG.put(config.getId(), config);
+                    }
+                    setConfigs(jdbcParam.getConfigs());
 
-                Collections.sort(getConfigs(), Comparator.comparing(ConfigParam::getCreateTime));
+                    Collections.sort(getConfigs(), Comparator.comparing(ConfigParam::getCreateTime));
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
 
     }

@@ -147,7 +147,7 @@ public class MysqlTabpaneController extends MysqlTabpaneView {
      */
     public void saveConfig() {
         try {
-            ConfigParam jdbcParam = getJDBCParam();
+            ConfigParam jdbcParam = getConfigParam();
             jdbcParam.setType(ConfigParam.ConfigType.MYSQL);
             if (StringUtils.isBlank(configId.getText())) {
                 jdbcParam.setId(ShortUUID.generateShortUuid().toLowerCase());
@@ -221,7 +221,7 @@ public class MysqlTabpaneController extends MysqlTabpaneView {
         }
 
     }
-    private ConfigParam getJDBCParam() {
+    private ConfigParam getConfigParam() {
         ConfigParam jdbcParam = new ConfigParam();
         jdbcParam.setName(connName.getText());
         jdbcParam.setDatebase(database.getText());

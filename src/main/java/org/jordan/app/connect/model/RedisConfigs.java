@@ -1,6 +1,7 @@
 package org.jordan.app.connect.model;
 
 import com.google.common.collect.Lists;
+import com.sun.org.apache.regexp.internal.RE;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,7 +27,12 @@ import java.util.List;
 public class RedisConfigs extends ConnectConfig implements Serializable {
     private static final long serialVersionUID = -4458074172372300213L;
     private List<ConfigParam> configs;
+    private RedisConfigs(){}
 
+    private static RedisConfigs redisConfigs = new RedisConfigs();
+    public static RedisConfigs getInstance() {
+        return redisConfigs;
+    }
     @Override
     public void saveConfig(ConfigParam configParam) {
         CONFIG.put(configParam.getId(), configParam);
@@ -49,20 +55,23 @@ public class RedisConfigs extends ConnectConfig implements Serializable {
 
     @Override
     public void initConfig() {
-        File configFile = new File(MyFileUtils.getUserDir() + File.separator + "config" + File.separator + ConfigParam.ConfigType.MYSQL + ".xml");
-        try {
-            RedisConfigs jdbcParam = XmlUtils.xmlToBean(FileUtils.readFileToString(configFile, "utf-8"), RedisConfigs.class);
-            if (jdbcParam != null) {
-                for (ConfigParam config : jdbcParam.getConfigs()) {
-                    CONFIG.put(config.getId(), config);
-                }
-                setConfigs(jdbcParam.getConfigs());
+        File configFile = new File(MyFileUtils.getUserDir() + File.separator + "config" + File.separator + ConfigParam.ConfigType.REDIS + ".xml");
+        if (configFile.exists()) {
+            try {
+                RedisConfigs jdbcParam = XmlUtils.xmlToBean(FileUtils.readFileToString(configFile, "utf-8"), RedisConfigs.class);
+                if (jdbcParam != null) {
+                    for (ConfigParam config : jdbcParam.getConfigs()) {
+                        CONFIG.put(config.getId(), config);
+                    }
+                    setConfigs(jdbcParam.getConfigs());
 
-                Collections.sort(getConfigs(), Comparator.comparing(ConfigParam::getCreateTime));
+                    Collections.sort(getConfigs(), Comparator.comparing(ConfigParam::getCreateTime));
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
+
     }
 
     @Override
