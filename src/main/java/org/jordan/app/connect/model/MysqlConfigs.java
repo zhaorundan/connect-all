@@ -25,7 +25,6 @@ import java.util.List;
 @EqualsAndHashCode
 public class MysqlConfigs extends ConnectConfig implements Serializable{
     private static final long serialVersionUID = -4458074172372300213L;
-    private List<ConfigParam> configs;
     private MysqlConfigs() {
 
     }
@@ -73,13 +72,5 @@ public class MysqlConfigs extends ConnectConfig implements Serializable{
             }
         }
 
-    }
-
-    @Override
-    public void delConfig(String configId) {
-        ConfigParam configParam = CONFIG.get(configId);
-        CONFIG.remove(configId);
-        getConfigs().remove(configParam);
-        save(getConfigs(),configParam.getType());
     }
 }

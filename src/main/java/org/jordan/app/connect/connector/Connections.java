@@ -1,7 +1,7 @@
 package org.jordan.app.connect.connector;
 
 import org.apache.commons.lang3.StringUtils;
-import org.jordan.app.connect.exception.JDBCException;
+import org.jordan.app.connect.exception.ConnectionException;
 import org.jordan.app.connect.model.ConfigParam;
 import org.jordan.app.connect.model.MysqlConfigs;
 
@@ -54,7 +54,7 @@ public class Connections {
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection(url, jdbcParam.getUserName(), jdbcParam.getPassword());
         } catch (Exception e) {
-            throw new JDBCException("创建jdbc连接失败");
+            throw new ConnectionException("创建jdbc连接失败");
         }
 
         return conn;

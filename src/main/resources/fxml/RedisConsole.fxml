@@ -13,25 +13,26 @@
                     <children>
                         <HBox>
                             <children>
-                                <ComboBox prefHeight="28.0" prefWidth="249.0"/>
-                                <TextField editable="false" prefHeight="26.0" prefWidth="83.0" text="Keys:"/>
+                                <ComboBox prefHeight="28.0" prefWidth="249.0" fx:id="redisDatabases"/>
+                                <TextField editable="false" prefHeight="26.0" prefWidth="83.0" text="Keys:" />
+                                <TextField editable="false" prefHeight="26.0" prefWidth="83.0"  fx:id="keysCount"/>
                             </children>
                         </HBox>
                         <HBox prefHeight="33.0" prefWidth="332.0">
                             <children>
-                                <TextField/>
-                                <Button mnemonicParsing="false" text="搜索"/>
-                                <CheckBox mnemonicParsing="false" text="精确搜索"/>
+                                <TextField fx:id="searchKey"/>
+                                <Button mnemonicParsing="false" text="搜索" onMouseClicked="#searchForKey"/>
+                                <CheckBox mnemonicParsing="false" text="精确搜索" fx:id="searchAccurate"/>
                             </children>
                         </HBox>
                         <ToolBar prefHeight="28.0" prefWidth="332.0">
                             <items>
-                                <Button mnemonicParsing="false" prefWidth="10.0" text="创建"/>
-                                <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="42.0" text="删除"/>
+                                <Button mnemonicParsing="false" prefWidth="10.0" text="创建" onMouseClicked="#createKey"/>
+                                <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="42.0" text="删除" onMouseClicked="#deleteKey"/>
                                 <Label alignment="CENTER_RIGHT" text="注：最多显示3000条左右" textAlignment="RIGHT"/>
                             </items>
                         </ToolBar>
-                        <TableView prefHeight="457.0" prefWidth="332.0" />
+                        <TableView prefHeight="457.0" prefWidth="332.0" fx:id="redisKeyView"/>
                         <Pagination prefHeight="199.0" prefWidth="332.0"/>
                     </children>
                 </VBox>

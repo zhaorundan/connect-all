@@ -5,11 +5,11 @@ package org.jordan.app.connect.exception;
  * @Description:
  * @date 2018/9/3下午4:34
  */
-public class JDBCException extends RuntimeException {
-    public JDBCException(String message) {
+public class ConnectionException extends RuntimeException {
+    public ConnectionException(String message) {
         super(message);
     }
 
-    public JDBCException() {
+    public ConnectionException() {
     }
 }
