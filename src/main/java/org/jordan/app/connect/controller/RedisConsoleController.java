@@ -36,10 +36,19 @@ public class RedisConsoleController extends RedisConsoleView {
         });
         initLeftData(0);
     }
+
+    /**
+     * 初始化左侧面板的数据
+     * 1 key的数量
+     * 2 tableview
+     * 3 分页组件
+     * @param dbIndex
+     */
     private void initLeftData(int dbIndex) {
         Long dbSize = RedisServiceImpl.getInstance().getDbSize(configId,0);
         keysCount.setText(dbSize.toString());
 
+        RedisServiceImpl.getInstance().listDataWithPage(configId);
 
     }
 

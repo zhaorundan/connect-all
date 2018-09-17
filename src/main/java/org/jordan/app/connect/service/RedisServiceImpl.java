@@ -1,13 +1,18 @@
 package org.jordan.app.connect.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.MapUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.jordan.app.connect.exception.ConnectionException;
 import org.jordan.app.connect.model.ConfigParam;
 import org.jordan.app.connect.model.RedisConfigs;
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.ScanParams;
+import redis.clients.jedis.ScanResult;
 
 import java.util.List;
 
+@Slf4j
 public class RedisServiceImpl {
     private static RedisServiceImpl redisService = new RedisServiceImpl();
 
@@ -33,7 +38,10 @@ public class RedisServiceImpl {
         if (jedis == null) {
             ConfigParam configParam = RedisConfigs.CONFIG.get(configId);
             jedis = new Jedis(configParam.getHost(), configParam.getPort());
-            jedis.auth(configParam.getPassword());
+            if (StringUtils.isNotBlank(configParam.getPassword())) {
+
+                jedis.auth(configParam.getPassword());
+            }
             if (jedis == null) {
                 throw new ConnectionException("jediscli connect failed");
             }
@@ -87,8 +95,20 @@ public class RedisServiceImpl {
         return RedisConfigs.getInstance().getConfigs();
     }
 
-    public void listKeysWithPage(String configId) {
+    public void listDataWithPage(String configId) {
+        Jedis jedis = getJedis(configId);
+        ScanParams scanParams = new ScanParams().count(50).match("*");
+        String cur = ScanParams.SCAN_POINTER_START;
 
+        do {
+            ScanResult<String> scanResult = jedis.scan(cur, scanParams);
+            // work with result
+            scanResult.getResult();
+            cur = scanResult.getStringCursor();
+
+        } while (!cur.equals(ScanParams.SCAN_POINTER_START));
+
+        log.info("db size:{}",jedis.getDB());
     }
 
 }
