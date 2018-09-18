@@ -21,7 +21,7 @@
     <children>
         <TabPane fx:id="redisTabpane" prefHeight="500.0" prefWidth="718.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <tabs>
-                <Tab closable="false" text="Connections">
+                <Tab closable="false" text="Connections" fx:id="connections">
                     <content>
                         <SplitPane dividerPositions="0.3088480801335559" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="441.0" prefWidth="718.0">
                             <items>

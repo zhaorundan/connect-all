@@ -1,5 +1,6 @@
 package org.jordan.app.connect.model;
 
+import javafx.beans.property.SimpleStringProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,15 +12,31 @@ import java.io.Serializable;
  * @Description:
  * @date 2018/9/18下午9:33
  */
-@Getter
-@Setter
-@NoArgsConstructor
 public class RedisData implements Serializable {
-    private String keyType;
-    private String key;
+    private final SimpleStringProperty keytype = new SimpleStringProperty();
+    private final SimpleStringProperty key = new SimpleStringProperty();
 
     public RedisData(String keyType, String key) {
-        this.keyType = keyType;
-        this.key = key;
+        this.keytype.set(keyType);
+        this.key.set(key);
+    }
+
+    public void setKeytype(String keytype) {
+        this.keytype.set(keytype);
+    }
+    public String getKeytype() {
+        return keytype.get();
+    }
+    public SimpleStringProperty keytypeProperty() {
+        return keytype;
+    }
+    public void setKey(String key) {
+        this.key.set(key);
+    }
+    public String getKey() {
+        return key.get();
+    }
+    public SimpleStringProperty keyProperty() {
+        return key;
     }
 }

@@ -51,7 +51,16 @@ public class RedisTabpaneController extends RedisTabpaneView {
             }
         });
     }
-    public Tab addConsoleTab(String tabName, String jdbcId) throws Exception {
+    public void addConsoleTab(String tabName, String jdbcId) throws Exception {
+        if (redisTabpane.getTabs().size() > 0) {
+            for (Tab tab : redisTabpane.getTabs()) {
+                if (tab.getId().equalsIgnoreCase("tab" + jdbcId)) {
+                    redisTabpane.getSelectionModel().select(tab);
+                    return;
+                }
+            }
+        }
+
         Tab tab = new Tab();
         tab.setText(tabName);
         tab.setClosable(true);
@@ -73,7 +82,6 @@ public class RedisTabpaneController extends RedisTabpaneView {
         redisTabpane.getSelectionModel().select(tab);
         consoleController.initData();
         consoleController.initView();
-        return tab;
     }
     private void deleteConfig(String configId) {
         RedisServiceImpl.getInstance().delConfig(configId);

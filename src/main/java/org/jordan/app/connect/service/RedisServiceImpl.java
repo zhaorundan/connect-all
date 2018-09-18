@@ -2,6 +2,8 @@ package org.jordan.app.connect.service;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -12,6 +14,7 @@ import org.jordan.app.connect.model.RedisConfigs;
 import org.jordan.app.connect.model.RedisData;
 import redis.clients.jedis.*;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -97,10 +100,15 @@ public class RedisServiceImpl {
         RedisConfigs.getInstance().initConfig();
         return RedisConfigs.getInstance().getConfigs();
     }
-
-    public Pager listDataWithPager(String configId) {
+    private Pipeline pipeline ;
+    public Pager listDataWithPager(String configId,int dbIndex) {
         Pager<RedisData> pager = new Pager<>();
         Jedis jedis = getJedis(configId);
+        jedis.select(dbIndex);
+        long dbsize = jedis.dbSize();
+        if (dbsize == 0) {
+            return new Pager();
+        }
         ScanParams scanParams = new ScanParams().count(Pager.PAGE_SIZE).match("*");
         String cur = ScanParams.SCAN_POINTER_START;
 
@@ -108,16 +116,23 @@ public class RedisServiceImpl {
         // work with result
         List<String> keys = scanResult.getResult();
         cur = scanResult.getStringCursor();
-        List<RedisData> redisData = Lists.newArrayList();
-        Pipeline pipeline = jedis.pipelined();
+        List<RedisData> redisDataList = Lists.newArrayList();
+        pipeline = jedis.pipelined();
         Map<String, Response<String>> responseMap = Maps.newHashMap();
         for (String key : keys) {
             responseMap.put(key, pipeline.type(key));
         }
+        pipeline.clear();
+        for (String s : responseMap.keySet()) {
+            RedisData redisData = new RedisData(responseMap.get(s).get(), s);
+            redisDataList.add(redisData);
+        }
         pipeline.sync();
-
+        pager.setResult(redisDataList);
         pager.setCursor(cur);
-        log.info("db size:{}",jedis.getDB());
+        pager.setTotalCount(dbsize);
+        log.info("db size:{}",dbsize);
+
         return pager;
     }
 
