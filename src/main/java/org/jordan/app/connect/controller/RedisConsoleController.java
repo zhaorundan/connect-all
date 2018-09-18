@@ -48,7 +48,7 @@ public class RedisConsoleController extends RedisConsoleView {
         Long dbSize = RedisServiceImpl.getInstance().getDbSize(configId,0);
         keysCount.setText(dbSize.toString());
 
-        RedisServiceImpl.getInstance().listDataWithPage(configId);
+        RedisServiceImpl.getInstance().listDataWithPager(configId);
 
     }
 

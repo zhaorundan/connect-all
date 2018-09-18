@@ -1,16 +1,19 @@
 package org.jordan.app.connect.service;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jordan.app.connect.exception.ConnectionException;
 import org.jordan.app.connect.model.ConfigParam;
+import org.jordan.app.connect.model.Pager;
 import org.jordan.app.connect.model.RedisConfigs;
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.ScanParams;
-import redis.clients.jedis.ScanResult;
+import org.jordan.app.connect.model.RedisData;
+import redis.clients.jedis.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 public class RedisServiceImpl {
@@ -37,7 +40,7 @@ public class RedisServiceImpl {
         Jedis jedis = RedisConfigs.connections.get(configId);
         if (jedis == null) {
             ConfigParam configParam = RedisConfigs.CONFIG.get(configId);
-            jedis = new Jedis(configParam.getHost(), configParam.getPort());
+            jedis = new Jedis(configParam.getHost(), configParam.getPort(),Integer.MAX_VALUE);
             if (StringUtils.isNotBlank(configParam.getPassword())) {
 
                 jedis.auth(configParam.getPassword());
@@ -95,20 +98,27 @@ public class RedisServiceImpl {
         return RedisConfigs.getInstance().getConfigs();
     }
 
-    public void listDataWithPage(String configId) {
+    public Pager listDataWithPager(String configId) {
+        Pager<RedisData> pager = new Pager<>();
         Jedis jedis = getJedis(configId);
-        ScanParams scanParams = new ScanParams().count(50).match("*");
+        ScanParams scanParams = new ScanParams().count(Pager.PAGE_SIZE).match("*");
         String cur = ScanParams.SCAN_POINTER_START;
 
-        do {
-            ScanResult<String> scanResult = jedis.scan(cur, scanParams);
-            // work with result
-            scanResult.getResult();
-            cur = scanResult.getStringCursor();
+        ScanResult<String> scanResult = jedis.scan(cur, scanParams);
+        // work with result
+        List<String> keys = scanResult.getResult();
+        cur = scanResult.getStringCursor();
+        List<RedisData> redisData = Lists.newArrayList();
+        Pipeline pipeline = jedis.pipelined();
+        Map<String, Response<String>> responseMap = Maps.newHashMap();
+        for (String key : keys) {
+            responseMap.put(key, pipeline.type(key));
+        }
+        pipeline.sync();
 
-        } while (!cur.equals(ScanParams.SCAN_POINTER_START));
-
+        pager.setCursor(cur);
         log.info("db size:{}",jedis.getDB());
+        return pager;
     }
 
 }
