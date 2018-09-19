@@ -5,75 +5,93 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<SplitPane dividerPositions="0.42105263157894735" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jordan.app.connect.controller.RedisConsoleController">
+<SplitPane dividerPositions="0.42105263157894735" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0"
+           prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+           AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="org.jordan.app.connect.controller.RedisConsoleController">
     <items>
         <AnchorPane prefHeight="730.0" prefWidth="358.0">
             <children>
-                <VBox>
+                <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                      prefHeight="700.0" prefWidth="350.0" spacing="10.0">
                     <children>
-                        <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="300.0" >
+                        <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                              prefHeight="33.0" prefWidth="300.0">
                             <children>
-                                <ComboBox fx:id="redisDatabases" prefHeight="28.0" prefWidth="138.0" />
-                                <TextField editable="false" prefHeight="26.0" prefWidth="83.0" text="Keys:" />
-                                <TextField fx:id="keysCount" editable="false" prefHeight="26.0" prefWidth="83.0" />
+                                <ComboBox fx:id="redisDatabases" prefHeight="28.0" prefWidth="138.0"/>
+                                <TextField editable="false" prefHeight="26.0" prefWidth="83.0" text="Keys:"/>
+                                <TextField fx:id="keysCount" editable="false" prefHeight="26.0" prefWidth="83.0"/>
                             </children>
                         </HBox>
-                        <HBox prefHeight="33.0" prefWidth="300.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
+                        <HBox prefHeight="33.0" prefWidth="300.0" maxHeight="-Infinity" maxWidth="-Infinity"
+                              minHeight="-Infinity" minWidth="-Infinity">
                             <children>
-                                <TextField fx:id="searchKey" prefHeight="27.0" prefWidth="161.0" />
-                                <Button mnemonicParsing="false" onMouseClicked="#searchForKey" text="搜索" />
-                                <CheckBox fx:id="searchHit" mnemonicParsing="false" prefHeight="27.0" prefWidth="76.0" text="精确搜索">
-                           <HBox.margin>
-                              <Insets left="10.0" />
-                           </HBox.margin></CheckBox>
+                                <TextField fx:id="searchKey" prefHeight="27.0" prefWidth="161.0"/>
+                                <Button mnemonicParsing="false" onMouseClicked="#searchForKey" text="搜索"/>
+                                <CheckBox fx:id="searchHit" mnemonicParsing="false" prefHeight="27.0" prefWidth="76.0"
+                                          text="精确搜索">
+                                </CheckBox>
                             </children>
                         </HBox>
-                        <ToolBar prefHeight="47.0" prefWidth="299.0">
+                        <ToolBar prefHeight="33.0" prefWidth="300.0" maxWidth="-Infinity" VBox.vgrow="ALWAYS">
                             <items>
-                                <Button mnemonicParsing="false" onMouseClicked="#createKey" prefWidth="10.0" text="创建" />
-                                <Button mnemonicParsing="false" onMouseClicked="#deleteKey" prefHeight="35.0" prefWidth="42.0" text="删除" />
-                                <Label alignment="CENTER_RIGHT" text="注：最多显示3000条左右" textAlignment="RIGHT" />
+                                <Button mnemonicParsing="false" onMouseClicked="#createKey" prefWidth="42.0" text="创建" maxHeight="Infinity" maxWidth="Infinity"/>
+                                <Button mnemonicParsing="false" onMouseClicked="#deleteKey" prefHeight="35.0" prefWidth="42.0" text="删除" maxHeight="Infinity" maxWidth="Infinity"/>
+                                <Label alignment="CENTER_RIGHT" text="注：最多显示3000条左右" textAlignment="RIGHT"/>
                             </items>
                         </ToolBar>
-                        <TableView fx:id="redisKeyView" prefHeight="457.0" prefWidth="332.0" />
-                        <Pagination prefHeight="199.0" prefWidth="332.0" />
+                        <TableView fx:id="redisKeyView" prefHeight="457.0" prefWidth="332.0" maxWidth="-Infinity"
+                                   maxHeight="-Infinity" VBox.vgrow="ALWAYS"/>
+                        <Pagination prefHeight="199.0" prefWidth="332.0" maxWidth="-Infinity" VBox.vgrow="ALWAYS"/>
                     </children>
                 </VBox>
             </children>
         </AnchorPane>
-        <TabPane prefHeight="765.0" prefWidth="573.0" tabClosingPolicy="UNAVAILABLE">
-            <tabs>
-                <Tab text="Untitled Tab 1">
-                    <content>
-                        <VBox prefHeight="200.0" prefWidth="100.0">
-                            <children>
-                                <HBox prefHeight="37.0" prefWidth="458.0">
+        <AnchorPane prefHeight="500.0" prefWidth="800.0" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
+            <children>
+                <TabPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                         AnchorPane.topAnchor="0.0">
+                    <tabs>
+                        <Tab text="key" fx:id="keyTab">
+                            <content>
+                                <VBox prefHeight="200.0" prefWidth="100.0">
                                     <children>
-                                        <Label text="键名" />
-                                        <TextField editable="false" />
-                                        <Label text="SET" />
-                                        <Label text="TTL" textAlignment="CENTER" />
-                                        <TextField prefHeight="26.0" prefWidth="76.0" /><Label text="(s)" />
-                                        <Button mnemonicParsing="false" text="修改TTL" />
+                                        <HBox prefHeight="37.0" prefWidth="800.0" maxHeight="-Infinity"
+                                              maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                                              spacing="10.0">
+                                            <children>
+                                                <Label text="键名"/>
+                                                <TextField editable="false" fx:id="keyName"/>
+                                                <Label text="SET"/>
+                                                <Label text="TTL" textAlignment="CENTER"/>
+                                                <TextField prefHeight="26.0" prefWidth="76.0" fx:id="keyTTL"/>
+                                                <Label text="(s)"/>
+                                                <Button mnemonicParsing="false" text="修改TTL" onMouseClicked="#updateKeyTTL"/>
+                                            </children>
+                                            <padding>
+                                                <Insets right="30.0" />
+                                            </padding>
+                                        </HBox>
+                                        <HBox prefWidth="800.0" maxHeight="-Infinity" maxWidth="-Infinity"
+                                              minHeight="-Infinity" minWidth="-Infinity" spacing="10.0">
+                                            <children>
+                                                <Button mnemonicParsing="false" text="刷新"/>
+                                                <Button mnemonicParsing="false" text="新增"/>
+                                                <Button mnemonicParsing="false" text="删除"/>
+                                                <Button mnemonicParsing="false" text="提交更改"/>
+                                                <TextField/>
+                                                <Button mnemonicParsing="false" text="搜索"/>
+                                            </children>
+                                        </HBox>
+                                        <TableView prefHeight="754.0" prefWidth="458.0" fx:id="redisValueView"/>
+                                        <Pagination prefHeight="200.0" prefWidth="200.0"/>
                                     </children>
-                                </HBox>
-                                <HBox prefHeight="43.0" prefWidth="458.0">
-                                    <children>
-                                        <Button mnemonicParsing="false" text="刷新" />
-                                        <Button mnemonicParsing="false" text="新增" />
-                                        <Button mnemonicParsing="false" text="删除" />
-                                        <Button mnemonicParsing="false" text="提交更改" />
-                                        <TextField />
-                                        <Button mnemonicParsing="false" text="搜索" />
-                                    </children>
-                                </HBox>
-                                <TableView prefHeight="754.0" prefWidth="458.0" />
-                                <Pagination prefHeight="200.0" prefWidth="200.0" />
-                            </children>
-                        </VBox>
-                    </content>
-                </Tab>
-            </tabs>
-        </TabPane>
+                                </VBox>
+                            </content>
+                        </Tab>
+                    </tabs>
+                </TabPane>
+            </children>
+        </AnchorPane>
     </items>
 </SplitPane>

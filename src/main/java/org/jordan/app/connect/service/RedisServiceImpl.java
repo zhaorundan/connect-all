@@ -2,8 +2,6 @@ package org.jordan.app.connect.service;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -14,9 +12,9 @@ import org.jordan.app.connect.model.RedisConfigs;
 import org.jordan.app.connect.model.RedisData;
 import redis.clients.jedis.*;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Slf4j
 public class RedisServiceImpl {
@@ -43,7 +41,7 @@ public class RedisServiceImpl {
         Jedis jedis = RedisConfigs.connections.get(configId);
         if (jedis == null) {
             ConfigParam configParam = RedisConfigs.CONFIG.get(configId);
-            jedis = new Jedis(configParam.getHost(), configParam.getPort(),Integer.MAX_VALUE);
+            jedis = new Jedis(configParam.getHost(), configParam.getPort(), Integer.MAX_VALUE);
             if (StringUtils.isNotBlank(configParam.getPassword())) {
 
                 jedis.auth(configParam.getPassword());
@@ -89,7 +87,8 @@ public class RedisServiceImpl {
 
         return Integer.valueOf(databaseCount);
     }
-    public long getDbSize(String configId,int dbIndex) {
+
+    public long getDbSize(String configId, int dbIndex) {
         Jedis jedis = getJedis(configId);
         jedis.select(dbIndex);
         return jedis.dbSize();
@@ -100,8 +99,14 @@ public class RedisServiceImpl {
         RedisConfigs.getInstance().initConfig();
         return RedisConfigs.getInstance().getConfigs();
     }
-    private Pipeline pipeline ;
-    public Pager listDataWithPager(String configId,int dbIndex) {
+
+    private Pipeline pipeline;
+
+    public Pager<RedisData> listDataWithPager(String configId, int dbIndex) {
+        return listDataWithPager(configId, dbIndex, "", false);
+    }
+
+    public Pager<RedisData> listDataWithPager(String configId, int dbIndex, String searchKey, boolean isFuzzy) {
         Pager<RedisData> pager = new Pager<>();
         Jedis jedis = getJedis(configId);
         jedis.select(dbIndex);
@@ -109,7 +114,18 @@ public class RedisServiceImpl {
         if (dbsize == 0) {
             return new Pager();
         }
-        ScanParams scanParams = new ScanParams().count(Pager.PAGE_SIZE).match("*");
+        ScanParams scanParams ;
+        if (StringUtils.isNotBlank(searchKey)) {
+            if (isFuzzy) {
+                scanParams = new ScanParams().count(Pager.PAGE_SIZE).match(searchKey);
+            } else {
+                scanParams = new ScanParams().count(Pager.PAGE_SIZE).match("*" + searchKey + "*");
+            }
+
+        } else {
+            scanParams = new ScanParams().count(Pager.PAGE_SIZE).match("*");
+        }
+
         String cur = ScanParams.SCAN_POINTER_START;
 
         ScanResult<String> scanResult = jedis.scan(cur, scanParams);
@@ -124,16 +140,66 @@ public class RedisServiceImpl {
         }
         pipeline.clear();
         for (String s : responseMap.keySet()) {
-            RedisData redisData = new RedisData(responseMap.get(s).get(), s);
-            redisDataList.add(redisData);
+            redisDataList.add(new RedisData().setColumnData(responseMap.get(s).get(), s));
         }
         pipeline.sync();
         pager.setResult(redisDataList);
         pager.setCursor(cur);
         pager.setTotalCount(dbsize);
-        log.info("db size:{}",dbsize);
+        log.info("db size:{}", dbsize);
 
         return pager;
+    }
+
+    public Pager<RedisData> listValueOfKey(String keytype, String key, String configId, int dbIndex) {
+        Pager<RedisData> pager = new Pager<>();
+        List<RedisData> redisDataList = Lists.newArrayList();
+        try {
+            Jedis jedis = getJedis(configId);
+            jedis.select(dbIndex);
+            String value;
+            switch (keytype.toLowerCase()) {
+                case "string":
+                    value = jedis.get(key);
+                    redisDataList.add(new RedisData().setStringValue(keytype, new String(value.getBytes("utf-8"))));
+                    break;
+                case "hash":
+                    Map<String, String> valueMap = jedis.hgetAll(key);
+                    for (String feild : valueMap.keySet()) {
+                        redisDataList.add(new RedisData().setHashValue(keytype, new String(feild.getBytes("utf-8")), new String(valueMap.get(feild).getBytes("utf-8"))));
+                    }
+                    break;
+                case "set":
+                    Set<String> setValues = jedis.smembers(key);
+                    for (String setValue : setValues) {
+                        redisDataList.add(new RedisData().setStringValue(keytype, new String(setValue.getBytes("utf-8"))));
+                    }
+                    break;
+                case "list":
+                    List<String> listValues = jedis.lrange(key, 0, -1);
+                    for (String listValue : listValues) {
+                        redisDataList.add(new RedisData().setStringValue(keytype, new String(listValue.getBytes("utf-8"))));
+                    }
+                    break;
+                case "zset":
+                    Set<Tuple> tuples = jedis.zrangeWithScores(key, 0, -1);
+                    for (Tuple tuple : tuples) {
+                        redisDataList.add(new RedisData().setSortedSetValue(keytype, new String(tuple.getElement().getBytes("utf-8")), tuple.getScore()));
+                    }
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        pager.setResult(redisDataList);
+        return pager;
+    }
+
+    public Long getKeyTTL(String keytype, String key, String configId, int dbIndex) {
+        Jedis jedis = getJedis(configId);
+        jedis.select(dbIndex);
+        Long ttl = jedis.ttl(key);
+        return ttl;
     }
 
 }
