@@ -23,5 +23,7 @@ public abstract class RedisConsoleView implements Initializable {
     protected TextField keyName;
     @FXML
     protected TextField keyTTL;
+    @FXML
+    protected Label redisKeyType;
 
 }

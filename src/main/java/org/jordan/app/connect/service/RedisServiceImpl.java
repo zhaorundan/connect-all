@@ -188,9 +188,12 @@ public class RedisServiceImpl {
                     }
 
             }
+            Long ttl = jedis.ttl(key);
+            pager.setTtl(ttl);
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         pager.setResult(redisDataList);
         return pager;
     }

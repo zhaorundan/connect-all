@@ -2,6 +2,8 @@ package org.jordan.app.connect.model;
 
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 

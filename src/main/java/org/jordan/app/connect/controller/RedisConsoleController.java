@@ -60,6 +60,8 @@ public class RedisConsoleController extends RedisConsoleView {
                 keyName.setText(redisData.getKey());
                 keyTTL.setText(RedisServiceImpl.getInstance().getKeyTTL(redisData.getKeytype(), redisData.getKey(), configId, dbIndex).toString());
                 setValueTableData(values);
+                redisKeyType.setText(redisData.getKeytype());
+                keyTTL.setText(values.getTtl().toString());
             } else {
 
             }
@@ -169,11 +171,13 @@ public class RedisConsoleController extends RedisConsoleView {
 
     public void searchForKey() {
         String key = searchKey.getText();
+        Pager<RedisData> pager ;
         if (StringUtils.isBlank(key)) {
-            return;
+            boolean isFuzzy = searchHit.isSelected();
+            pager = RedisServiceImpl.getInstance().listDataWithPager(configId, dbIndex, key, isFuzzy);
+        } else {
+            pager = RedisServiceImpl.getInstance().listDataWithPager(configId, dbIndex);
         }
-        boolean isFuzzy = searchHit.isSelected();
-        Pager<RedisData> pager = RedisServiceImpl.getInstance().listDataWithPager(configId, dbIndex, key, isFuzzy);
         if (!data.isEmpty()) {
             data.clear();
         }
@@ -191,6 +195,8 @@ public class RedisConsoleController extends RedisConsoleView {
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(scene);
             stage.showAndWait();
+            fxmlLoader.getController();
+
         } catch (Exception e) {
             e.printStackTrace();
         }

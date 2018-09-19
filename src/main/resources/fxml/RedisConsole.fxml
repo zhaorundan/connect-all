@@ -1,90 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.*?>
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
-<SplitPane dividerPositions="0.42105263157894735" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0"
-           prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-           AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-           fx:controller="org.jordan.app.connect.controller.RedisConsoleController">
+<SplitPane dividerPositions="0.42105263157894735" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jordan.app.connect.controller.RedisConsoleController">
     <items>
         <AnchorPane prefHeight="730.0" prefWidth="358.0">
             <children>
-                <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-                      prefHeight="700.0" prefWidth="350.0" spacing="10.0">
+                <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="350.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
-                        <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-                              prefHeight="33.0" prefWidth="300.0">
+                        <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="300.0">
                             <children>
-                                <ComboBox fx:id="redisDatabases" prefHeight="28.0" prefWidth="138.0"/>
-                                <TextField editable="false" prefHeight="26.0" prefWidth="83.0" text="Keys:"/>
-                                <TextField fx:id="keysCount" editable="false" prefHeight="26.0" prefWidth="83.0"/>
+                                <ComboBox fx:id="redisDatabases" prefHeight="28.0" prefWidth="138.0">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin></ComboBox>
+                                <TextField editable="false" prefHeight="26.0" prefWidth="83.0" text="Keys:">
+                           <HBox.margin>
+                              <Insets left="1.0" />
+                           </HBox.margin></TextField>
+                                <TextField fx:id="keysCount" editable="false" prefHeight="26.0" prefWidth="83.0">
+                           <HBox.margin>
+                              <Insets left="1.0" />
+                           </HBox.margin></TextField>
                             </children>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
                         </HBox>
-                        <HBox prefHeight="33.0" prefWidth="300.0" maxHeight="-Infinity" maxWidth="-Infinity"
-                              minHeight="-Infinity" minWidth="-Infinity">
+                        <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="300.0" spacing="5.0">
                             <children>
-                                <TextField fx:id="searchKey" prefHeight="27.0" prefWidth="161.0"/>
-                                <Button mnemonicParsing="false" onMouseClicked="#searchForKey" text="搜索"/>
-                                <CheckBox fx:id="searchHit" mnemonicParsing="false" prefHeight="27.0" prefWidth="76.0"
-                                          text="精确搜索">
+                                <TextField fx:id="searchKey" prefHeight="27.0" prefWidth="161.0" />
+                                <Button mnemonicParsing="false" onMouseClicked="#searchForKey" text="搜索" />
+                                <CheckBox fx:id="searchHit" mnemonicParsing="false" prefHeight="27.0" prefWidth="76.0" text="精确搜索">
                                 </CheckBox>
                             </children>
+                     <VBox.margin>
+                        <Insets left="5.0" />
+                     </VBox.margin>
                         </HBox>
-                        <ToolBar prefHeight="33.0" prefWidth="300.0" maxWidth="-Infinity" VBox.vgrow="ALWAYS">
+                        <ToolBar maxWidth="-Infinity" prefHeight="33.0" prefWidth="300.0" VBox.vgrow="ALWAYS">
                             <items>
-                                <Button mnemonicParsing="false" onMouseClicked="#createKey" prefWidth="42.0" text="创建" maxHeight="Infinity" maxWidth="Infinity"/>
-                                <Button mnemonicParsing="false" onMouseClicked="#deleteKey" prefHeight="35.0" prefWidth="42.0" text="删除" maxHeight="Infinity" maxWidth="Infinity"/>
-                                <Label alignment="CENTER_RIGHT" text="注：最多显示3000条左右" textAlignment="RIGHT"/>
+                                <Button maxHeight="Infinity" maxWidth="Infinity" mnemonicParsing="false" onMouseClicked="#createKey" text="创建" />
+                                <Button mnemonicParsing="false" onMouseClicked="#deleteKey" text="删除" />
+                                <Label alignment="CENTER_RIGHT" text="注：最多显示3000条左右" textAlignment="RIGHT" />
                             </items>
                         </ToolBar>
-                        <TableView fx:id="redisKeyView" prefHeight="457.0" prefWidth="332.0" maxWidth="-Infinity"
-                                   maxHeight="-Infinity" VBox.vgrow="ALWAYS"/>
-                        <Pagination prefHeight="199.0" prefWidth="332.0" maxWidth="-Infinity" VBox.vgrow="ALWAYS"/>
+                        <TableView fx:id="redisKeyView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="457.0" prefWidth="332.0" VBox.vgrow="ALWAYS" />
+                        <Pagination maxHeight="30.0" VBox.vgrow="ALWAYS" />
                     </children>
                 </VBox>
             </children>
         </AnchorPane>
-        <AnchorPane prefHeight="500.0" prefWidth="800.0" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
+        <AnchorPane maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0">
             <children>
-                <TabPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                         AnchorPane.topAnchor="0.0">
+                <TabPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <tabs>
-                        <Tab text="key" fx:id="keyTab">
+                        <Tab fx:id="keyTab" text="key">
                             <content>
                                 <VBox prefHeight="200.0" prefWidth="100.0">
                                     <children>
-                                        <HBox prefHeight="37.0" prefWidth="800.0" maxHeight="-Infinity"
-                                              maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-                                              spacing="10.0">
+                                        <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="37.0" prefWidth="800.0" spacing="10.0">
                                             <children>
-                                                <Label text="键名"/>
-                                                <TextField editable="false" fx:id="keyName"/>
-                                                <Label text="SET"/>
-                                                <Label text="TTL" textAlignment="CENTER"/>
-                                                <TextField prefHeight="26.0" prefWidth="76.0" fx:id="keyTTL"/>
-                                                <Label text="(s)"/>
-                                                <Button mnemonicParsing="false" text="修改TTL" onMouseClicked="#updateKeyTTL"/>
+                                                <Label text="键名">
+                                       <HBox.margin>
+                                          <Insets top="5.0" />
+                                       </HBox.margin></Label>
+                                                <TextField fx:id="keyName" editable="false" />
+                                                <Label text="key type" fx:id="redisKeyType">
+                                       <HBox.margin>
+                                          <Insets top="5.0" />
+                                       </HBox.margin></Label>
+                                                <Label text="TTL" textAlignment="CENTER">
+                                       <HBox.margin>
+                                          <Insets top="5.0" />
+                                       </HBox.margin></Label>
+                                                <TextField fx:id="keyTTL" prefHeight="26.0" prefWidth="76.0" />
+                                                <Label text="(s)">
+                                       <HBox.margin>
+                                          <Insets top="5.0" />
+                                       </HBox.margin></Label>
+                                                <Button mnemonicParsing="false" onMouseClicked="#updateKeyTTL" text="修改TTL" />
                                             </children>
                                             <padding>
                                                 <Insets right="30.0" />
                                             </padding>
+                                 <VBox.margin>
+                                    <Insets left="5.0" top="10.0" />
+                                 </VBox.margin>
                                         </HBox>
-                                        <HBox prefWidth="800.0" maxHeight="-Infinity" maxWidth="-Infinity"
-                                              minHeight="-Infinity" minWidth="-Infinity" spacing="10.0">
+                                        <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="800.0" spacing="10.0">
                                             <children>
-                                                <Button mnemonicParsing="false" text="刷新"/>
-                                                <Button mnemonicParsing="false" text="新增"/>
-                                                <Button mnemonicParsing="false" text="删除"/>
-                                                <Button mnemonicParsing="false" text="提交更改"/>
-                                                <TextField/>
-                                                <Button mnemonicParsing="false" text="搜索"/>
+                                                <Button mnemonicParsing="false" text="刷新" />
+                                                <Button mnemonicParsing="false" text="新增" />
+                                                <Button mnemonicParsing="false" text="删除" />
+                                                <Button mnemonicParsing="false" text="提交更改" />
+                                                <TextField />
+                                                <Button mnemonicParsing="false" text="搜索" />
                                             </children>
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="5.0" />
+                                 </VBox.margin>
                                         </HBox>
-                                        <TableView prefHeight="754.0" prefWidth="458.0" fx:id="redisValueView"/>
-                                        <Pagination prefHeight="200.0" prefWidth="200.0"/>
+                                        <TableView fx:id="redisValueView" prefHeight="754.0" prefWidth="458.0" />
+                                        <Pagination prefHeight="200.0" prefWidth="200.0" />
                                     </children>
                                 </VBox>
                             </content>
