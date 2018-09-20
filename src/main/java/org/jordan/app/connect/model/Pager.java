@@ -24,6 +24,10 @@ public class Pager<T> implements Serializable ,Iterable<T> {
     @Setter
     @Getter
     protected String cursor;
+
+    @Getter
+    @Setter
+    protected Long ttl;
     /**
      * 总记录数
      */
