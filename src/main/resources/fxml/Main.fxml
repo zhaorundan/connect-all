@@ -12,6 +12,7 @@
                         <MenuItem fx:id="addRedis" mnemonicParsing="false" text="Redis" />
                         <MenuItem fx:id="addMongo" mnemonicParsing="false" text="MongoDB" />
                         <MenuItem fx:id="addZookeeper" mnemonicParsing="false" text="Zookeeper" />
+                        <MenuItem fx:id="adDdubbo" mnemonicParsing="false" text="dubbo" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edit">

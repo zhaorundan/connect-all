@@ -11,7 +11,11 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import org.jordan.app.connect.utils.JavaFxViewUtil;
+import org.jordan.app.connect.utils.ThreadPoolUtil;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * @author zhaord
@@ -28,7 +32,6 @@ public class MainApp extends Application {
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Connect All");
-
         initRootLayout();
         Thread.currentThread().setUncaughtExceptionHandler((thread,throwable)->{
             Alert alert = new Alert(Alert.AlertType.WARNING);

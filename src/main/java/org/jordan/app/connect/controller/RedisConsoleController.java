@@ -1,18 +1,16 @@
 package org.jordan.app.connect.controller;
 
+import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Dialog;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.util.Pair;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +18,6 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jordan.app.connect.model.Pager;
 import org.jordan.app.connect.model.RedisData;
-import org.jordan.app.connect.service.MysqlServiceImpl;
 import org.jordan.app.connect.service.RedisServiceImpl;
 import org.jordan.app.connect.view.RedisConsoleView;
 
@@ -54,19 +51,24 @@ public class RedisConsoleController extends RedisConsoleView {
         redisKeyView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 RedisData redisData = (RedisData) newValue;
-                Pager<RedisData> values = RedisServiceImpl.getInstance().listValueOfKey(redisData.getKeytype(), redisData.getKey(), configId, dbIndex);
-                keytype = redisData.getKeytype();
                 keyTab.setText("DB"+dbIndex+":"+redisData.getKey());
                 keyName.setText(redisData.getKey());
-                keyTTL.setText(RedisServiceImpl.getInstance().getKeyTTL(redisData.getKeytype(), redisData.getKey(), configId, dbIndex).toString());
-                setValueTableData(values);
                 redisKeyType.setText(redisData.getKeytype());
-                keyTTL.setText(values.getTtl().toString());
+                keytype = redisData.getKeytype();
+                Pager<RedisData> pager = RedisServiceImpl.getInstance().listValueOfKey(redisData.getKeytype(), redisData.getKey(), configId, dbIndex);
+                setValueTableData(pager);
+                keyTTL.setText(pager.getTtl().toString());
+//                Platform.runLater(()->{
+//
+//                });
+
+
             } else {
 
             }
         });
     }
+
     private final ObservableList<RedisData> data = FXCollections.observableArrayList();
     private final ObservableList<RedisData> stringData = FXCollections.observableArrayList();
     private final ObservableList<RedisData> setData = FXCollections.observableArrayList();
@@ -172,7 +174,7 @@ public class RedisConsoleController extends RedisConsoleView {
     public void searchForKey() {
         String key = searchKey.getText();
         Pager<RedisData> pager ;
-        if (StringUtils.isBlank(key)) {
+        if (StringUtils.isNotBlank(key)) {
             boolean isFuzzy = searchHit.isSelected();
             pager = RedisServiceImpl.getInstance().listDataWithPager(configId, dbIndex, key, isFuzzy);
         } else {
@@ -185,21 +187,18 @@ public class RedisConsoleController extends RedisConsoleView {
         data.addAll(list);
     }
 
-    public void createKey() {
-        FXMLLoader fxmlLoader = null;
-        try {
-            fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/AddKeyDialog.fxml"));
-            AnchorPane anchorPane = fxmlLoader.load();
-            Scene scene = new Scene(anchorPane, 300, 200);
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setScene(scene);
-            stage.showAndWait();
-            fxmlLoader.getController();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public void createKey()throws Exception {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/AddKeyDialog.fxml"));
+        AnchorPane anchorPane = fxmlLoader.load();
+        Scene scene = new Scene(anchorPane, 400, 200);
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(scene);
+        AddKeyDialogController addKeyDialogController = fxmlLoader.getController();
+        addKeyDialogController.setStage(stage);
+        addKeyDialogController.initParams(configId, dbIndex);
+        addKeyDialogController.setRedisConsoleController(this);
+        stage.showAndWait();
     }
 
     public void deleteKey() {

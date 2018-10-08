@@ -7,9 +7,9 @@
         </encoder>
     </appender>
 
-    <logger name="org.jordan" level="INFO"/>
+    <logger name="org.jordan" level="DEBUG"/>
 
-    <root level="INFO">
+    <root level="DEBUG">
         <appender-ref ref="STDOUT"/>
     </root>
 
