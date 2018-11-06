@@ -1,18 +1,14 @@
 package org.jordan.app.connect.controller;
 
-import de.felixroske.jfxsupport.FXMLController;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import lombok.Getter;
@@ -21,7 +17,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.jordan.app.connect.connector.Connections;
 import org.jordan.app.connect.view.MysqlQueryView;
 
-import javax.annotation.Resource;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
