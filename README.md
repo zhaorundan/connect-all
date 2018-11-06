@@ -1,4 +1,3 @@
-![](/file/1.png)
 ![](/file/2.png)
 ![](/file/3.png)
 ![](/file/4.png)
