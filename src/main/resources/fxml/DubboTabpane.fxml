@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jordan.app.connect.controller.RedisTabpaneController">
+    <children>
+        <TabPane fx:id="redisTabpane" prefHeight="500.0" prefWidth="718.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <tabs>
+                <Tab closable="false" text="Connections" fx:id="connections">
+                    <content>
+                        <SplitPane dividerPositions="0.3088480801335559" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="441.0" prefWidth="718.0">
+                            <items>
+                                <AnchorPane maxWidth="180.0" prefHeight="441.0" SplitPane.resizableWithParent="false">
+                                    <children>
+                                        <VBox prefHeight="438.0" prefWidth="221.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-3.0" AnchorPane.topAnchor="0.0">
+                                            <children>
+                                                <ListView fx:id="redisListview" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#clickview" prefHeight="409.0" prefWidth="181.0" VBox.vgrow="ALWAYS" />
+                                                <HBox prefHeight="30.0" prefWidth="100.0" VBox.vgrow="NEVER">
+                                                    <children>
+                                                        <Button fx:id="redisCreate" mnemonicParsing="false" onAction="#addConfig" text="create" HBox.hgrow="ALWAYS"/>
+                                                        <Button mnemonicParsing="false" text="Button" />
+                                                        <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="62.0" text="Button" HBox.hgrow="ALWAYS"/>
+                                                    </children>
+                                                </HBox>
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </AnchorPane>
+                                <AnchorPane prefHeight="411.0" prefWidth="530.0">
+                                    <children>
+                                        <GridPane hgap="1.0" prefWidth="433.0" vgap="2.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="80.0" BorderPane.alignment="CENTER">
+                                            <columnConstraints>
+                                                <ColumnConstraints />
+                                                <ColumnConstraints fillWidth="false" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints maxHeight="32.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="31.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                            <children>
+                                                <TextField fx:id="connName" prefHeight="27.0" prefWidth="236.0" GridPane.columnIndex="1" />
+                                                <Label fx:id="name" text="Name:" />
+                                                <Label text="Host:" GridPane.rowIndex="1" />
+                                                <TextField fx:id="host" prefHeight="27.0" prefWidth="236.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                <Label text="Port:" GridPane.rowIndex="3" />
+                                                <TextField fx:id="port" prefWidth="236.0" text="6379" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                <Label fx:id="configId" text="" GridPane.rowIndex="4" />
+                                            </children>
+                                        </GridPane>
+                                        <Button fx:id="connButton" layoutX="78.0" layoutY="284.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#connectTest" text="connect test" BorderPane.alignment="CENTER" />
+                                        <Button fx:id="saveButton" layoutX="194.0" layoutY="284.0" mnemonicParsing="false" onAction="#saveConfig" text="save" />
+                                        <Button fx:id="resetButton" layoutX="256.0" layoutY="284.0" mnemonicParsing="false" onAction="#resetConfig" text="reset" />
+
+                                    </children>
+                                </AnchorPane>
+                            </items>
+                        </SplitPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>
+</AnchorPane>
