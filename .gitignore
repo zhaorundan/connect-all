@@ -22,3 +22,5 @@ Thumbs.db
 .idea
 .config
 .target
+*/config/
+*/target/
