@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.BorderPane?>
+<BorderPane fx:id="mainBorderPane" prefHeight="524.0" prefWidth="755.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jordan.app.connect.controller.MainController">
+    <top>
+        <MenuBar BorderPane.alignment="CENTER">
+            <menus>
+                <Menu fx:id="mainMenu" mnemonicParsing="false" onAction="#menuEvent" text="Connect">
+                    <items>
+                        <MenuItem fx:id="addMysql" mnemonicParsing="false" text="MySql" />
+                        <MenuItem fx:id="addRedis" mnemonicParsing="false" text="Redis" />
+                        <MenuItem fx:id="addMongo" mnemonicParsing="false" text="MongoDB" />
+                        <MenuItem fx:id="addZookeeper" mnemonicParsing="false" text="Zookeeper" />
+                        <MenuItem fx:id="adDdubbo" mnemonicParsing="false" text="dubbo" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Delete" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="About" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
+    <center>
+
+    </center>
+</BorderPane>
